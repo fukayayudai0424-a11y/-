@@ -80,6 +80,32 @@ const browser = await chromium.launch({
 });
 ```
 
+## クイックスタート（ローカル実行）
+
+```bash
+# 1. リポジトリをクローン
+git clone <repository-url>
+cd <repository-name>
+
+# 2. 依存関係をインストール
+npm install
+
+# 3. Playwrightブラウザをインストール
+npx playwright install chromium
+
+# 4. 認証情報を設定（ad-scraper.js の CONFIG を編集）
+# email, password, searchKeyword を設定
+
+# 5. 実行
+node ad-scraper.js
+```
+
+## 出力サンプル
+
+実行後、以下のファイルが生成されます：
+- `ad_data.xlsx` - Excelファイル（収集した広告データ）
+- `screenshots/` - 各ステップのスクリーンショット
+
 ## ライセンス
 
 ISC
