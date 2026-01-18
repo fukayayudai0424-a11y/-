@@ -7,10 +7,18 @@
     "start": "node ad-scraper.js",
     "setup": "npx playwright install chromium"
   },
-  "keywords": ["scraper", "playwright", "ad-analysis"],
+  "keywords": [
+    "scraper",
+    "playwright",
+    "ad-analysis"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "firebase": "^12.8.0",
+    "https-proxy-agent": "^7.0.6",
+    "jsdom": "^27.4.0",
+    "node-fetch": "^2.7.0",
     "playwright": "^1.57.0",
     "xlsx": "^0.18.5"
   }
