@@ -5,15 +5,18 @@
 }
 
 :root {
-  --primary-color: #2563eb;
-  --primary-dark: #1d4ed8;
-  --secondary-color: #64748b;
-  --text-color: #1e293b;
-  --text-light: #64748b;
+  --primary-color: #e67e22;
+  --primary-dark: #d35400;
+  --primary-light: #f39c12;
+  --secondary-color: #8b5a2b;
+  --accent-color: #ff6b35;
+  --text-color: #333333;
+  --text-light: #666666;
   --bg-color: #ffffff;
-  --bg-gray: #f8fafc;
-  --border-color: #e2e8f0;
-  --success-color: #22c55e;
+  --bg-warm: #fff9f5;
+  --bg-cream: #fef6e9;
+  --border-color: #f0e6dc;
+  --success-color: #27ae60;
   --max-width: 1200px;
 }
 
@@ -23,7 +26,7 @@ html {
 
 body {
   font-family: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  line-height: 1.7;
+  line-height: 1.8;
   color: var(--text-color);
   background-color: var(--bg-color);
 }
@@ -54,6 +57,17 @@ ul {
   text-align: center;
   margin-bottom: 0.5rem;
   color: var(--text-color);
+  position: relative;
+}
+
+.section-title::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary-color), var(--primary-light));
+  margin: 1rem auto 0;
+  border-radius: 2px;
 }
 
 .section-subtitle {
@@ -64,23 +78,25 @@ ul {
 
 .btn {
   display: inline-block;
-  padding: 0.875rem 2rem;
+  padding: 1rem 2rem;
   font-size: 1rem;
   font-weight: 600;
-  border-radius: 8px;
+  border-radius: 50px;
   cursor: pointer;
   transition: all 0.3s ease;
   border: none;
 }
 
 .btn-primary {
-  background-color: var(--primary-color);
+  background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
   color: white;
+  box-shadow: 0 4px 15px rgba(230, 126, 34, 0.3);
 }
 
 .btn-primary:hover {
-  background-color: var(--primary-dark);
+  background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
   transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(230, 126, 34, 0.4);
 }
 
 .btn-secondary {

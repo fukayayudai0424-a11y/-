@@ -15,7 +15,7 @@ function Header() {
     <header className="header">
       <div className="header-container">
         <div className="logo">
-          <span className="logo-text">BuppanPro</span>
+          <span className="logo-text">キャリアリンク</span>
         </div>
 
         <button
@@ -29,6 +29,7 @@ function Header() {
         <nav className={`nav ${isMenuOpen ? 'open' : ''}`}>
           <ul className="nav-list">
             <li><button onClick={() => scrollToSection('hero')}>ホーム</button></li>
+            <li><button onClick={() => scrollToSection('features')}>私たちの強み</button></li>
             <li><button onClick={() => scrollToSection('services')}>サービス</button></li>
             <li><button onClick={() => scrollToSection('about')}>会社概要</button></li>
             <li><button onClick={() => scrollToSection('contact')}>お問い合わせ</button></li>

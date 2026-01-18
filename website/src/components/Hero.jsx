@@ -9,35 +9,36 @@ function Hero() {
   return (
     <section id="hero" className="hero">
       <div className="hero-content">
+        <p className="hero-tagline">あなたの「働く」を全力でサポート</p>
         <h1 className="hero-title">
-          物販ビジネスで<br />
-          <span className="highlight">新しい収入源を</span>
+          一人ひとりの未来に<br />
+          <span className="highlight">寄り添う人材サービス</span>
         </h1>
         <p className="hero-subtitle">
-          初心者から上級者まで、物販・せどりビジネスの成功をサポート。<br />
-          Amazon、メルカリ、eBay輸出など多彩な販路で収益化を実現します。
+          キャリアリンクは、求職者の皆様と企業様をつなぐ架け橋として、<br />
+          最適なマッチングと丁寧なサポートで、双方の成功をお手伝いします。
         </p>
         <div className="hero-buttons">
           <button className="btn btn-primary" onClick={scrollToContact}>
-            無料相談はこちら
+            お仕事をお探しの方
           </button>
-          <button className="btn btn-secondary" onClick={() => document.getElementById('services').scrollIntoView({ behavior: 'smooth' })}>
-            サービスを見る
+          <button className="btn btn-secondary" onClick={scrollToContact}>
+            企業様のお問い合わせ
           </button>
         </div>
       </div>
       <div className="hero-stats">
         <div className="stat">
-          <span className="stat-number">500+</span>
-          <span className="stat-label">サポート実績</span>
+          <span className="stat-number">1,200+</span>
+          <span className="stat-label">取引企業数</span>
+        </div>
+        <div className="stat">
+          <span className="stat-number">5,000+</span>
+          <span className="stat-label">就業実績</span>
         </div>
         <div className="stat">
           <span className="stat-number">98%</span>
-          <span className="stat-label">顧客満足度</span>
-        </div>
-        <div className="stat">
-          <span className="stat-number">3年</span>
-          <span className="stat-label">運営実績</span>
+          <span className="stat-label">定着率</span>
         </div>
       </div>
     </section>
