@@ -18,7 +18,7 @@ function Contact() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    alert('お問い合わせありがとうございます。担当者より2営業日以内にご連絡いたします。')
+    alert('お問い合わせを受け付けました。担当者より折り返しご連絡いたします。')
     setFormData({
       name: '',
       email: '',
@@ -36,16 +36,14 @@ function Contact() {
 
         <div className="contact-info-cards">
           <div className="contact-card">
-            <div className="contact-card-icon">📞</div>
             <h3>お電話でのお問い合わせ</h3>
             <p className="contact-phone">03-1234-5678</p>
-            <p className="contact-hours">受付時間：平日 9:00〜18:00</p>
+            <p className="contact-hours">平日 9:00〜18:00</p>
           </div>
           <div className="contact-card">
-            <div className="contact-card-icon">📧</div>
             <h3>メールでのお問い合わせ</h3>
-            <p className="contact-email">info@careerlink-sample.jp</p>
-            <p className="contact-hours">24時間受付（返信は営業時間内）</p>
+            <p className="contact-email">info@careerlink.jp</p>
+            <p className="contact-hours">24時間受付</p>
           </div>
         </div>
 
@@ -61,7 +59,6 @@ function Contact() {
               value={formData.name}
               onChange={handleChange}
               required
-              placeholder="山田 太郎"
             />
           </div>
 
@@ -74,7 +71,6 @@ function Contact() {
               value={formData.email}
               onChange={handleChange}
               required
-              placeholder="example@email.com"
             />
           </div>
 
@@ -86,7 +82,6 @@ function Contact() {
               name="phone"
               value={formData.phone}
               onChange={handleChange}
-              placeholder="090-1234-5678"
             />
           </div>
 
@@ -100,7 +95,7 @@ function Contact() {
               required
             >
               <option value="">選択してください</option>
-              <option value="job">お仕事をお探しの方</option>
+              <option value="job">お仕事のご相談</option>
               <option value="register">派遣登録について</option>
               <option value="company">企業様からのお問い合わせ</option>
               <option value="other">その他</option>
@@ -116,7 +111,6 @@ function Contact() {
               onChange={handleChange}
               required
               rows="5"
-              placeholder="ご希望の職種や勤務地、ご質問などをご記入ください"
             ></textarea>
           </div>
 
