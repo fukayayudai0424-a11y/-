@@ -1,0 +1,17 @@
+{
+  "name": "ad-scraper",
+  "version": "1.0.0",
+  "description": "動画広告分析Pro 広告データスクレイピングツール",
+  "main": "ad-scraper.js",
+  "scripts": {
+    "start": "node ad-scraper.js",
+    "setup": "npx playwright install chromium"
+  },
+  "keywords": ["scraper", "playwright", "ad-analysis"],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "playwright": "^1.57.0",
+    "xlsx": "^0.18.5"
+  }
+}
