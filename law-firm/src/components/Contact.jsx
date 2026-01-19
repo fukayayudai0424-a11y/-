@@ -1,9 +1,15 @@
 function Contact() {
   return (
     <section id="contact" className="contact">
-      <div className="container">
-        <h2>まずはお気軽にご相談ください</h2>
-        <p>初回相談無料。秘密厳守でご対応いたします。</p>
+      <div className="container contact-container">
+        <div className="section-header">
+          <span className="en-title">Contact</span>
+          <h2>お問い合わせ</h2>
+          <p className="description">
+            初回相談無料。秘密厳守でご対応いたします。<br />
+            まずはお気軽にご連絡ください。
+          </p>
+        </div>
 
         <div className="contact-cards">
           <div className="contact-card">
@@ -19,16 +25,18 @@ function Contact() {
             <small>24時間受付・翌営業日回答</small>
           </div>
           <div className="contact-card">
-            <div className="contact-card-icon">📍</div>
-            <h3>事務所所在地</h3>
-            <p>東京都新宿区○○1-2-3</p>
-            <small>○○駅徒歩3分</small>
+            <div className="contact-card-icon">🕐</div>
+            <h3>営業時間</h3>
+            <p>平日 9:00〜18:00</p>
+            <small>土日祝は事前予約制</small>
           </div>
         </div>
 
-        <a href="tel:03-1234-5678" className="btn contact-btn">
-          📞 今すぐ電話で相談する
-        </a>
+        <div className="contact-cta">
+          <a href="tel:03-1234-5678" className="btn btn-gold">
+            今すぐ無料相談を予約する
+          </a>
+        </div>
       </div>
     </section>
   );
