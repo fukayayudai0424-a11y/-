@@ -10,17 +10,26 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500;600&family=Cormorant+Garamond:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@200;300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Zen+Kaku+Gothic+New:wght@300;400;500&display=swap" rel="stylesheet">
 
     <!-- CSS -->
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    <!-- カーソルエフェクト -->
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-follower" id="cursorFollower"></div>
+
     <!-- ローディングスクリーン -->
     <div id="loading" class="loading">
         <div class="loading-content">
-            <span class="loading-logo">SISUI</span>
-            <div class="loading-bar"></div>
+            <div class="loading-logo-wrap">
+                <span class="loading-logo">SISUI</span>
+                <span class="loading-tagline">髪質改善サロン専売品</span>
+            </div>
+            <div class="loading-progress">
+                <div class="loading-bar"></div>
+            </div>
         </div>
     </div>
 
@@ -33,11 +42,11 @@
             </a>
             <nav class="nav" id="nav">
                 <ul class="nav-list">
-                    <li><a href="#concept">コンセプト</a></li>
-                    <li><a href="#products">商品一覧</a></li>
-                    <li><a href="#features">特徴</a></li>
-                    <li><a href="#voice">お客様の声</a></li>
-                    <li><a href="#about">ブランド</a></li>
+                    <li><a href="#concept" data-text="コンセプト">コンセプト</a></li>
+                    <li><a href="#products" data-text="商品一覧">商品一覧</a></li>
+                    <li><a href="#ingredients" data-text="こだわり成分">こだわり成分</a></li>
+                    <li><a href="#voice" data-text="お客様の声">お客様の声</a></li>
+                    <li><a href="#faq" data-text="よくある質問">よくある質問</a></li>
                     <li><a href="https://sisui-beauty.com/" target="_blank" class="nav-cta">オンラインショップ</a></li>
                 </ul>
             </nav>
@@ -53,70 +62,178 @@
     <main>
         <!-- ヒーローセクション -->
         <section id="hero" class="hero">
-            <div class="hero-bg"></div>
-            <div class="hero-overlay"></div>
+            <div class="hero-bg">
+                <div class="hero-gradient"></div>
+                <div class="hero-pattern"></div>
+                <div class="floating-elements">
+                    <div class="float-circle float-1"></div>
+                    <div class="float-circle float-2"></div>
+                    <div class="float-circle float-3"></div>
+                    <div class="float-leaf float-4"></div>
+                    <div class="float-leaf float-5"></div>
+                </div>
+            </div>
             <div class="hero-content">
-                <p class="hero-subtitle fade-in">髪質改善サロン専売品</p>
-                <h1 class="hero-title fade-in delay-1">
-                    <span class="hero-title-main">美しい艶髪を、</span>
-                    <span class="hero-title-main">あなたに。</span>
+                <div class="hero-badge fade-in">
+                    <span class="badge-icon">✦</span>
+                    <span>髪質改善サロン専売品</span>
+                </div>
+                <h1 class="hero-title">
+                    <span class="hero-title-line fade-in delay-1">
+                        <span class="title-word">美しい艶髪を、</span>
+                    </span>
+                    <span class="hero-title-line fade-in delay-2">
+                        <span class="title-word">あなたに。</span>
+                    </span>
                 </h1>
-                <p class="hero-description fade-in delay-2">
-                    すべての日本人女性が<br class="sp-only">健康的で魅力的な艶髪を<br>
-                    手に入れてほしい。<br>
-                    その想いを込めて、<br class="sp-only">SISUIは生まれました。
+                <p class="hero-description fade-in delay-3">
+                    すべての日本人女性が健康的で魅力的な艶髪を手に入れてほしい。<br>
+                    その想いを込めて、SISUIは生まれました。
                 </p>
-                <div class="hero-cta fade-in delay-3">
-                    <a href="#products" class="btn btn-primary">商品を見る</a>
-                    <a href="#concept" class="btn btn-secondary">コンセプトを知る</a>
+                <div class="hero-cta fade-in delay-4">
+                    <a href="#products" class="btn btn-primary">
+                        <span class="btn-text">商品を見る</span>
+                        <span class="btn-icon">→</span>
+                    </a>
+                    <a href="#concept" class="btn btn-ghost">
+                        <span class="btn-text">コンセプトを知る</span>
+                    </a>
+                </div>
+                <div class="hero-stats fade-in delay-5">
+                    <div class="stat-item">
+                        <span class="stat-number" data-count="98">0</span>
+                        <span class="stat-unit">%</span>
+                        <span class="stat-label">満足度</span>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <span class="stat-number" data-count="15000">0</span>
+                        <span class="stat-unit">+</span>
+                        <span class="stat-label">愛用者数</span>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <span class="stat-number" data-count="500">0</span>
+                        <span class="stat-unit">+</span>
+                        <span class="stat-label">取扱サロン</span>
+                    </div>
                 </div>
             </div>
             <div class="hero-scroll">
+                <div class="scroll-mouse">
+                    <div class="scroll-wheel"></div>
+                </div>
                 <span>Scroll</span>
-                <div class="scroll-line"></div>
+            </div>
+            <div class="hero-side-text">
+                <span>Hair Quality Improvement</span>
             </div>
         </section>
+
+        <!-- ブランドストーリーティッカー -->
+        <div class="ticker">
+            <div class="ticker-wrap">
+                <div class="ticker-content">
+                    <span>SALON QUALITY</span>
+                    <span class="ticker-dot">◆</span>
+                    <span>髪質改善</span>
+                    <span class="ticker-dot">◆</span>
+                    <span>PROFESSIONAL CARE</span>
+                    <span class="ticker-dot">◆</span>
+                    <span>艶髪</span>
+                    <span class="ticker-dot">◆</span>
+                    <span>MADE IN JAPAN</span>
+                    <span class="ticker-dot">◆</span>
+                    <span>サロン専売品</span>
+                    <span class="ticker-dot">◆</span>
+                    <span>SALON QUALITY</span>
+                    <span class="ticker-dot">◆</span>
+                    <span>髪質改善</span>
+                    <span class="ticker-dot">◆</span>
+                    <span>PROFESSIONAL CARE</span>
+                    <span class="ticker-dot">◆</span>
+                    <span>艶髪</span>
+                    <span class="ticker-dot">◆</span>
+                    <span>MADE IN JAPAN</span>
+                    <span class="ticker-dot">◆</span>
+                    <span>サロン専売品</span>
+                    <span class="ticker-dot">◆</span>
+                </div>
+            </div>
+        </div>
 
         <!-- コンセプトセクション -->
         <section id="concept" class="concept section">
             <div class="container">
-                <div class="concept-inner">
-                    <div class="concept-image fade-in-left">
-                        <div class="concept-image-frame">
-                            <div class="concept-image-placeholder">
-                                <span>髪質改善イメージ</span>
+                <div class="concept-grid">
+                    <div class="concept-visual">
+                        <div class="concept-image-stack">
+                            <div class="concept-img concept-img-1 fade-in-left">
+                                <div class="img-placeholder img-hair">
+                                    <span>艶髪イメージ</span>
+                                </div>
                             </div>
+                            <div class="concept-img concept-img-2 fade-in-left delay-2">
+                                <div class="img-placeholder img-product">
+                                    <span>商品イメージ</span>
+                                </div>
+                            </div>
+                            <div class="concept-decoration"></div>
                         </div>
                     </div>
-                    <div class="concept-content fade-in-right">
-                        <span class="section-label">Concept</span>
-                        <h2 class="section-title">
+                    <div class="concept-content">
+                        <div class="section-header fade-in-right">
+                            <span class="section-number">01</span>
+                            <span class="section-label">Concept</span>
+                        </div>
+                        <h2 class="section-title fade-in-right delay-1">
                             「翠」に込めた<br>
-                            私たちの想い
+                            <span class="title-accent">私たちの想い</span>
                         </h2>
-                        <p class="concept-text">
-                            SISUIのブランドカラー「翠」には、<br>
-                            新緑のような瑞々しさと、<br>
-                            自然が持つ生命力への敬意が込められています。
-                        </p>
-                        <p class="concept-text">
-                            髪質改善サロンとして培った専門知識を活かし、<br>
-                            プロフェッショナルなホームケア製品を開発。<br>
-                            サロンでの施術効果を、<br>
-                            ご自宅でも長く維持していただけます。
-                        </p>
-                        <div class="concept-points">
-                            <div class="concept-point">
-                                <span class="point-number">01</span>
-                                <span class="point-text">サロン品質のホームケア</span>
+                        <div class="concept-text fade-in-right delay-2">
+                            <p class="lead-text">
+                                SISUIのブランドカラー「翠」には、<br>
+                                新緑のような瑞々しさと、<br>
+                                自然が持つ生命力への敬意が込められています。
+                            </p>
+                            <p>
+                                髪質改善サロンとして培った専門知識を活かし、プロフェッショナルなホームケア製品を開発。サロンでの施術効果を、ご自宅でも長く維持していただけます。
+                            </p>
+                        </div>
+                        <div class="concept-features fade-in-right delay-3">
+                            <div class="feature-item">
+                                <div class="feature-icon-wrap">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                                    </svg>
+                                </div>
+                                <div class="feature-text">
+                                    <h4>サロン品質</h4>
+                                    <p>プロが認める本物の品質</p>
+                                </div>
                             </div>
-                            <div class="concept-point">
-                                <span class="point-number">02</span>
-                                <span class="point-text">髪質改善の専門知識</span>
+                            <div class="feature-item">
+                                <div class="feature-icon-wrap">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                                    </svg>
+                                </div>
+                                <div class="feature-text">
+                                    <h4>厳選成分</h4>
+                                    <p>髪に優しい成分だけを使用</p>
+                                </div>
                             </div>
-                            <div class="concept-point">
-                                <span class="point-number">03</span>
-                                <span class="point-text">厳選された成分配合</span>
+                            <div class="feature-item">
+                                <div class="feature-icon-wrap">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                        <circle cx="12" cy="12" r="10"/>
+                                        <path d="M12 6v6l4 2"/>
+                                    </svg>
+                                </div>
+                                <div class="feature-text">
+                                    <h4>持続力</h4>
+                                    <p>効果が長く続く処方設計</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -126,207 +243,221 @@
 
         <!-- 商品セクション -->
         <section id="products" class="products section">
+            <div class="products-bg"></div>
             <div class="container">
-                <div class="section-header text-center fade-in">
+                <div class="section-header-center fade-in">
+                    <span class="section-number">02</span>
                     <span class="section-label">Products</span>
                     <h2 class="section-title">商品ラインナップ</h2>
-                    <p class="section-subtitle">サロン品質をご自宅で</p>
+                    <p class="section-subtitle">サロン品質をご自宅で体験</p>
                 </div>
 
-                <div class="products-grid">
-                    <!-- ヘアリペアミスト -->
-                    <article class="product-card fade-in-up">
-                        <div class="product-badge">人気No.1</div>
-                        <div class="product-image">
-                            <div class="product-image-placeholder">
-                                <span>ヘアリペアミスト</span>
+                <div class="products-showcase">
+                    <!-- メイン商品 -->
+                    <div class="product-main fade-in-up">
+                        <div class="product-main-badge">BEST SELLER</div>
+                        <div class="product-main-visual">
+                            <div class="product-glow"></div>
+                            <div class="product-main-image">
+                                <div class="img-placeholder img-mist">
+                                    <span>ヘアリペアミスト</span>
+                                </div>
                             </div>
                         </div>
-                        <div class="product-content">
+                        <div class="product-main-content">
                             <span class="product-category">アウトバストリートメント</span>
                             <h3 class="product-name">ヘアリペアミスト</h3>
+                            <p class="product-catch">熱で補修する、新発想トリートメント</p>
                             <p class="product-description">
-                                熱で補修する新発想のアウトバストリートメント。
-                                ドライヤーやアイロンの熱を味方に、
-                                ダメージを補修しながら美しい艶を実現。
+                                ドライヤーやアイロンの熱を味方に変える独自処方。
+                                使うたびに髪が補修され、サロン帰りのような艶髪へ。
                             </p>
-                            <div class="product-features">
-                                <span class="feature-tag">熱補修</span>
-                                <span class="feature-tag">ダメージケア</span>
-                                <span class="feature-tag">艶髪</span>
+                            <ul class="product-benefits">
+                                <li><span class="check-icon">✓</span>熱ダメージを補修に変換</li>
+                                <li><span class="check-icon">✓</span>軽やかな仕上がり</li>
+                                <li><span class="check-icon">✓</span>上品なフローラルの香り</li>
+                            </ul>
+                            <div class="product-price-wrap">
+                                <span class="product-price">¥3,740</span>
+                                <span class="product-price-tax">（税込）</span>
+                                <span class="product-volume">100ml</span>
                             </div>
-                            <div class="product-price">
-                                <span class="price">¥3,740</span>
-                                <span class="price-tax">（税込）</span>
-                            </div>
-                            <a href="https://sisui-beauty.com/" target="_blank" class="btn btn-product">詳細を見る</a>
+                            <a href="https://sisui-beauty.com/" target="_blank" class="btn btn-primary btn-product">
+                                <span class="btn-text">購入する</span>
+                                <span class="btn-icon">→</span>
+                            </a>
                         </div>
-                    </article>
+                    </div>
 
-                    <!-- ヘアリペアオイル -->
-                    <article class="product-card fade-in-up delay-1">
-                        <div class="product-image">
-                            <div class="product-image-placeholder">
-                                <span>ヘアリペアオイル</span>
+                    <!-- サブ商品グリッド -->
+                    <div class="products-grid">
+                        <article class="product-card fade-in-up delay-1">
+                            <div class="product-card-inner">
+                                <div class="product-card-image">
+                                    <div class="img-placeholder img-oil">
+                                        <span>ヘアリペアオイル</span>
+                                    </div>
+                                    <div class="product-card-overlay">
+                                        <a href="https://sisui-beauty.com/" target="_blank" class="overlay-btn">詳細を見る</a>
+                                    </div>
+                                </div>
+                                <div class="product-card-content">
+                                    <span class="product-category">ヘアオイル</span>
+                                    <h3 class="product-name">ヘアリペアオイル</h3>
+                                    <p class="product-short-desc">ペリセア配合の高機能オイル</p>
+                                    <div class="product-card-footer">
+                                        <span class="product-price">¥4,400<small>（税込）</small></span>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="product-content">
-                            <span class="product-category">ヘアオイル</span>
-                            <h3 class="product-name">ヘアリペアオイル</h3>
-                            <p class="product-description">
-                                ペリセアなどの高機能成分を贅沢に配合。
-                                軽やかな使用感で、べたつかずに
-                                しっとりまとまる髪へ導きます。
-                            </p>
-                            <div class="product-features">
-                                <span class="feature-tag">ペリセア配合</span>
-                                <span class="feature-tag">軽やか</span>
-                                <span class="feature-tag">保湿</span>
-                            </div>
-                            <div class="product-price">
-                                <span class="price">¥4,400</span>
-                                <span class="price-tax">（税込）</span>
-                            </div>
-                            <a href="https://sisui-beauty.com/" target="_blank" class="btn btn-product">詳細を見る</a>
-                        </div>
-                    </article>
+                        </article>
 
-                    <!-- シャンプー -->
-                    <article class="product-card fade-in-up delay-2">
-                        <div class="product-image">
-                            <div class="product-image-placeholder">
-                                <span>シャンプー</span>
+                        <article class="product-card fade-in-up delay-2">
+                            <div class="product-card-inner">
+                                <div class="product-card-image">
+                                    <div class="img-placeholder img-shampoo">
+                                        <span>シャンプー</span>
+                                    </div>
+                                    <div class="product-card-overlay">
+                                        <a href="https://sisui-beauty.com/" target="_blank" class="overlay-btn">詳細を見る</a>
+                                    </div>
+                                </div>
+                                <div class="product-card-content">
+                                    <span class="product-category">シャンプー</span>
+                                    <h3 class="product-name">SISUI シャンプー</h3>
+                                    <p class="product-short-desc">アミノ酸系の優しい洗い心地</p>
+                                    <div class="product-card-footer">
+                                        <span class="product-price">¥3,740<small>（税込）</small></span>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="product-content">
-                            <span class="product-category">シャンプー</span>
-                            <h3 class="product-name">SISUI シャンプー</h3>
-                            <p class="product-description">
-                                髪質改善サロンが開発した
-                                ダメージヘアのための優しいシャンプー。
-                                泡立ち豊かで、きしまず洗い上げます。
-                            </p>
-                            <div class="product-features">
-                                <span class="feature-tag">低刺激</span>
-                                <span class="feature-tag">アミノ酸系</span>
-                                <span class="feature-tag">泡立ち◎</span>
-                            </div>
-                            <div class="product-price">
-                                <span class="price">¥3,740</span>
-                                <span class="price-tax">（税込）</span>
-                            </div>
-                            <a href="https://sisui-beauty.com/" target="_blank" class="btn btn-product">詳細を見る</a>
-                        </div>
-                    </article>
+                        </article>
 
-                    <!-- トリートメント -->
-                    <article class="product-card fade-in-up delay-3">
-                        <div class="product-image">
-                            <div class="product-image-placeholder">
-                                <span>トリートメント</span>
+                        <article class="product-card fade-in-up delay-3">
+                            <div class="product-card-inner">
+                                <div class="product-card-image">
+                                    <div class="img-placeholder img-treatment">
+                                        <span>トリートメント</span>
+                                    </div>
+                                    <div class="product-card-overlay">
+                                        <a href="https://sisui-beauty.com/" target="_blank" class="overlay-btn">詳細を見る</a>
+                                    </div>
+                                </div>
+                                <div class="product-card-content">
+                                    <span class="product-category">トリートメント</span>
+                                    <h3 class="product-name">SISUI トリートメント</h3>
+                                    <p class="product-short-desc">深層補修で艶やかな髪へ</p>
+                                    <div class="product-card-footer">
+                                        <span class="product-price">¥4,180<small>（税込）</small></span>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="product-content">
-                            <span class="product-category">トリートメント</span>
-                            <h3 class="product-name">SISUI トリートメント</h3>
-                            <p class="product-description">
-                                サロンのような深い補修力を実現。
-                                髪の内部から整え、
-                                指通りなめらかな艶髪へ。
-                            </p>
-                            <div class="product-features">
-                                <span class="feature-tag">深層補修</span>
-                                <span class="feature-tag">艶</span>
-                                <span class="feature-tag">サラサラ</span>
-                            </div>
-                            <div class="product-price">
-                                <span class="price">¥4,180</span>
-                                <span class="price-tax">（税込）</span>
-                            </div>
-                            <a href="https://sisui-beauty.com/" target="_blank" class="btn btn-product">詳細を見る</a>
-                        </div>
-                    </article>
+                        </article>
+                    </div>
                 </div>
 
-                <div class="products-cta text-center fade-in">
-                    <a href="https://sisui-beauty.com/" target="_blank" class="btn btn-primary btn-large">
-                        オンラインショップで購入する
-                    </a>
-                    <p class="products-note">※定期便なら10〜15%OFF + 送料無料</p>
+                <div class="products-cta fade-in">
+                    <div class="cta-box">
+                        <div class="cta-box-content">
+                            <p class="cta-box-title">定期便なら<span class="highlight">10〜15%OFF</span></p>
+                            <p class="cta-box-text">さらに送料無料・いつでも解約OK</p>
+                        </div>
+                        <a href="https://sisui-beauty.com/" target="_blank" class="btn btn-accent">
+                            <span class="btn-text">定期便を申し込む</span>
+                            <span class="btn-icon">→</span>
+                        </a>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- 特徴セクション -->
-        <section id="features" class="features section">
+        <!-- こだわり成分セクション -->
+        <section id="ingredients" class="ingredients section">
             <div class="container">
-                <div class="section-header text-center fade-in">
-                    <span class="section-label">Features</span>
-                    <h2 class="section-title">選ばれる理由</h2>
-                    <p class="section-subtitle">SISUIが大切にしていること</p>
+                <div class="section-header-center fade-in">
+                    <span class="section-number">03</span>
+                    <span class="section-label">Ingredients</span>
+                    <h2 class="section-title">こだわりの厳選成分</h2>
+                    <p class="section-subtitle">髪の専門家が選び抜いた成分</p>
                 </div>
 
-                <div class="features-grid">
-                    <div class="feature-card fade-in-up">
-                        <div class="feature-icon">
-                            <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="32" cy="32" r="30" stroke="currentColor" stroke-width="2"/>
-                                <path d="M32 16v32M20 28l12-12 12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
+                <div class="ingredients-grid">
+                    <div class="ingredient-card fade-in-up">
+                        <div class="ingredient-visual">
+                            <div class="ingredient-icon">
+                                <svg viewBox="0 0 80 80" fill="none">
+                                    <circle cx="40" cy="40" r="35" stroke="currentColor" stroke-width="1"/>
+                                    <path d="M40 20v40M25 35l15-15 15 15M25 45l15 15 15-15" stroke="currentColor" stroke-width="1.5"/>
+                                </svg>
+                            </div>
                         </div>
-                        <h3 class="feature-title">サロン品質</h3>
-                        <p class="feature-text">
-                            髪質改善サロンで実際に使用している
-                            プロフェッショナル処方を採用。
-                            サロン帰りの仕上がりをご自宅で。
-                        </p>
+                        <div class="ingredient-content">
+                            <h3 class="ingredient-name">ペリセア</h3>
+                            <p class="ingredient-desc">
+                                わずか1分で髪内部に浸透し、ダメージを補修。
+                                髪のハリ・コシを取り戻します。
+                            </p>
+                            <span class="ingredient-tag">補修成分</span>
+                        </div>
                     </div>
 
-                    <div class="feature-card fade-in-up delay-1">
-                        <div class="feature-icon">
-                            <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M32 8C24 8 16 16 16 28c0 16 16 28 16 28s16-12 16-28c0-12-8-20-16-20z" stroke="currentColor" stroke-width="2"/>
-                                <circle cx="32" cy="28" r="6" stroke="currentColor" stroke-width="2"/>
-                            </svg>
+                    <div class="ingredient-card fade-in-up delay-1">
+                        <div class="ingredient-visual">
+                            <div class="ingredient-icon">
+                                <svg viewBox="0 0 80 80" fill="none">
+                                    <circle cx="40" cy="40" r="35" stroke="currentColor" stroke-width="1"/>
+                                    <circle cx="40" cy="40" r="15" stroke="currentColor" stroke-width="1.5"/>
+                                    <circle cx="40" cy="40" r="5" fill="currentColor"/>
+                                </svg>
+                            </div>
                         </div>
-                        <h3 class="feature-title">厳選成分</h3>
-                        <p class="feature-text">
-                            ペリセアをはじめとする
-                            高機能成分を厳選配合。
-                            髪の内部から補修・強化します。
-                        </p>
+                        <div class="ingredient-content">
+                            <h3 class="ingredient-name">γ-ドコサラクトン</h3>
+                            <p class="ingredient-desc">
+                                ドライヤーの熱で髪をコーティング。
+                                うねりやパサつきを抑制します。
+                            </p>
+                            <span class="ingredient-tag">熱補修成分</span>
+                        </div>
                     </div>
 
-                    <div class="feature-card fade-in-up delay-2">
-                        <div class="feature-icon">
-                            <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M12 32h40M32 12v40" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                                <circle cx="32" cy="32" r="8" stroke="currentColor" stroke-width="2"/>
-                                <circle cx="32" cy="32" r="20" stroke="currentColor" stroke-width="2" stroke-dasharray="4 4"/>
-                            </svg>
+                    <div class="ingredient-card fade-in-up delay-2">
+                        <div class="ingredient-visual">
+                            <div class="ingredient-icon">
+                                <svg viewBox="0 0 80 80" fill="none">
+                                    <circle cx="40" cy="40" r="35" stroke="currentColor" stroke-width="1"/>
+                                    <path d="M40 15c-14 0-25 11-25 25s25 30 25 30 25-16 25-30-11-25-25-25z" stroke="currentColor" stroke-width="1.5"/>
+                                </svg>
+                            </div>
                         </div>
-                        <h3 class="feature-title">熱補修技術</h3>
-                        <p class="feature-text">
-                            ドライヤーやアイロンの熱を
-                            味方に変える独自処方。
-                            スタイリングしながらケア。
-                        </p>
+                        <div class="ingredient-content">
+                            <h3 class="ingredient-name">メドウフォーム-δ-ラクトン</h3>
+                            <p class="ingredient-desc">
+                                キューティクルを保護し、
+                                カラーの持ちを良くします。
+                            </p>
+                            <span class="ingredient-tag">保護成分</span>
+                        </div>
                     </div>
 
-                    <div class="feature-card fade-in-up delay-3">
-                        <div class="feature-icon">
-                            <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M16 32c0-8.837 7.163-16 16-16s16 7.163 16 16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                                <path d="M48 32c0 8.837-7.163 16-16 16s-16-7.163-16-16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                                <circle cx="32" cy="32" r="4" fill="currentColor"/>
-                            </svg>
+                    <div class="ingredient-card fade-in-up delay-3">
+                        <div class="ingredient-visual">
+                            <div class="ingredient-icon">
+                                <svg viewBox="0 0 80 80" fill="none">
+                                    <circle cx="40" cy="40" r="35" stroke="currentColor" stroke-width="1"/>
+                                    <path d="M25 40h30M40 25v30" stroke="currentColor" stroke-width="1.5"/>
+                                    <circle cx="40" cy="40" r="20" stroke="currentColor" stroke-width="1" stroke-dasharray="3 3"/>
+                                </svg>
+                            </div>
                         </div>
-                        <h3 class="feature-title">持続力</h3>
-                        <p class="feature-text">
-                            サロンでの髪質改善効果を
-                            長期間キープ。
-                            毎日のケアで美しさを持続。
-                        </p>
+                        <div class="ingredient-content">
+                            <h3 class="ingredient-name">加水分解ケラチン</h3>
+                            <p class="ingredient-desc">
+                                髪の主成分と同じケラチンで、
+                                内部から強く健康な髪へ。
+                            </p>
+                            <span class="ingredient-tag">補強成分</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -335,161 +466,294 @@
         <!-- 使い方セクション -->
         <section id="howto" class="howto section">
             <div class="container">
-                <div class="section-header text-center fade-in">
+                <div class="section-header-center fade-in">
+                    <span class="section-number">04</span>
                     <span class="section-label">How to Use</span>
-                    <h2 class="section-title">おすすめの使い方</h2>
-                    <p class="section-subtitle">効果を最大限に引き出すステップ</p>
+                    <h2 class="section-title">効果的な使い方</h2>
+                    <p class="section-subtitle">4ステップで艶髪へ</p>
                 </div>
 
-                <div class="howto-steps">
+                <div class="howto-timeline">
+                    <div class="timeline-line"></div>
+
                     <div class="howto-step fade-in-up">
-                        <div class="step-number">STEP 01</div>
+                        <div class="step-marker">
+                            <span class="step-number">01</span>
+                        </div>
                         <div class="step-content">
-                            <h3 class="step-title">シャンプー</h3>
-                            <p class="step-text">
-                                ぬるま湯でしっかり予洗いした後、
-                                シャンプーを手のひらで泡立て、
-                                頭皮をマッサージするように洗います。
-                            </p>
+                            <div class="step-icon">
+                                <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <ellipse cx="24" cy="34" rx="14" ry="8"/>
+                                    <path d="M24 6v20M18 16l6-6 6 6"/>
+                                </svg>
+                            </div>
+                            <h3>シャンプー</h3>
+                            <p>ぬるま湯で予洗い後、泡立てて頭皮をマッサージ</p>
                         </div>
                     </div>
 
                     <div class="howto-step fade-in-up delay-1">
-                        <div class="step-number">STEP 02</div>
+                        <div class="step-marker">
+                            <span class="step-number">02</span>
+                        </div>
                         <div class="step-content">
-                            <h3 class="step-title">トリートメント</h3>
-                            <p class="step-text">
-                                水気を軽く切り、毛先を中心に塗布。
-                                目の粗いコームで均一になじませ、
-                                2〜3分置いてから洗い流します。
-                            </p>
+                            <div class="step-icon">
+                                <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M12 24c0-8 5-14 12-14s12 6 12 14"/>
+                                    <path d="M8 32h32M14 38h20"/>
+                                </svg>
+                            </div>
+                            <h3>トリートメント</h3>
+                            <p>毛先中心に塗布し、2〜3分置いてから洗い流す</p>
                         </div>
                     </div>
 
                     <div class="howto-step fade-in-up delay-2">
-                        <div class="step-number">STEP 03</div>
+                        <div class="step-marker">
+                            <span class="step-number">03</span>
+                        </div>
                         <div class="step-content">
-                            <h3 class="step-title">ヘアリペアミスト</h3>
-                            <p class="step-text">
-                                タオルドライ後、髪全体に吹きかけます。
-                                ドライヤーの熱で成分が浸透し、
-                                ダメージを補修します。
-                            </p>
+                            <div class="step-icon">
+                                <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M24 8v8M16 12l8 4 8-4"/>
+                                    <path d="M12 20l12 6 12-6v16l-12 6-12-6z"/>
+                                </svg>
+                            </div>
+                            <h3>ヘアリペアミスト</h3>
+                            <p>タオルドライ後、髪全体に吹きかけてドライヤーで乾かす</p>
                         </div>
                     </div>
 
                     <div class="howto-step fade-in-up delay-3">
-                        <div class="step-number">STEP 04</div>
+                        <div class="step-marker">
+                            <span class="step-number">04</span>
+                        </div>
                         <div class="step-content">
-                            <h3 class="step-title">ヘアリペアオイル</h3>
-                            <p class="step-text">
-                                乾かした後、毛先を中心に少量を。
-                                ツヤ出しと保湿の仕上げで、
-                                サロン帰りの艶髪が完成。
-                            </p>
+                            <div class="step-icon">
+                                <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <circle cx="24" cy="24" r="16"/>
+                                    <path d="M24 14v10l6 6"/>
+                                    <circle cx="24" cy="24" r="3"/>
+                                </svg>
+                            </div>
+                            <h3>ヘアリペアオイル</h3>
+                            <p>仕上げに毛先へ少量なじませて艶出し</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- お客様の声セクション -->
+        <!-- ビフォーアフター＆お客様の声 -->
         <section id="voice" class="voice section">
             <div class="container">
-                <div class="section-header text-center fade-in">
-                    <span class="section-label">Voice</span>
+                <div class="section-header-center fade-in">
+                    <span class="section-number">05</span>
+                    <span class="section-label">Customer Voice</span>
                     <h2 class="section-title">お客様の声</h2>
-                    <p class="section-subtitle">SISUIをお使いいただいている方々から</p>
+                    <p class="section-subtitle">SISUIで変わった、わたしの髪</p>
                 </div>
 
-                <div class="voice-grid">
-                    <div class="voice-card fade-in-up">
-                        <div class="voice-rating">
-                            <span>★★★★★</span>
+                <div class="voice-slider-wrap">
+                    <div class="voice-slider" id="voiceSlider">
+                        <div class="voice-card">
+                            <div class="voice-card-header">
+                                <div class="voice-avatar">
+                                    <span>A</span>
+                                </div>
+                                <div class="voice-meta">
+                                    <span class="voice-age">40代・会社員</span>
+                                    <div class="voice-rating">
+                                        <span>★★★★★</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="voice-card-body">
+                                <p class="voice-text">
+                                    「縮毛矯正後のケアに悩んでいましたが、ヘアリペアミストを使い始めてからサラサラが長続きするようになりました。朝のスタイリングも楽になって、手放せません！」
+                                </p>
+                            </div>
+                            <div class="voice-card-footer">
+                                <span class="voice-product">ヘアリペアミスト愛用</span>
+                            </div>
                         </div>
-                        <p class="voice-text">
-                            「縮毛矯正後のケアに悩んでいましたが、
-                            ヘアリペアミストを使い始めてから
-                            サラサラが長続きするように。
-                            手放せません！」
-                        </p>
-                        <div class="voice-author">
-                            <span class="author-info">40代・会社員</span>
-                            <span class="author-product">ヘアリペアミスト愛用</span>
+
+                        <div class="voice-card">
+                            <div class="voice-card-header">
+                                <div class="voice-avatar">
+                                    <span>K</span>
+                                </div>
+                                <div class="voice-meta">
+                                    <span class="voice-age">30代・主婦</span>
+                                    <div class="voice-rating">
+                                        <span>★★★★★</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="voice-card-body">
+                                <p class="voice-text">
+                                    「サロン専売品なので信頼できます。オイルなのにベタつかず、自然な艶が出るのがお気に入り。周りから髪を褒められることが増えました！」
+                                </p>
+                            </div>
+                            <div class="voice-card-footer">
+                                <span class="voice-product">ヘアリペアオイル愛用</span>
+                            </div>
+                        </div>
+
+                        <div class="voice-card">
+                            <div class="voice-card-header">
+                                <div class="voice-avatar">
+                                    <span>M</span>
+                                </div>
+                                <div class="voice-meta">
+                                    <span class="voice-age">50代・自営業</span>
+                                    <div class="voice-rating">
+                                        <span>★★★★★</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="voice-card-body">
+                                <p class="voice-text">
+                                    「年齢とともに髪のパサつきが気になっていました。シャンプーとトリートメントのライン使いで、髪質が変わったように感じます。娘にも勧めています。」
+                                </p>
+                            </div>
+                            <div class="voice-card-footer">
+                                <span class="voice-product">ライン使い愛用</span>
+                            </div>
+                        </div>
+
+                        <div class="voice-card">
+                            <div class="voice-card-header">
+                                <div class="voice-avatar">
+                                    <span>S</span>
+                                </div>
+                                <div class="voice-meta">
+                                    <span class="voice-age">35代・美容師</span>
+                                    <div class="voice-rating">
+                                        <span>★★★★★</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="voice-card-body">
+                                <p class="voice-text">
+                                    「プロとして自信を持ってお客様に勧められる品質です。特にヘアリペアミストは、熱で補修する発想が素晴らしい。サロンでも大人気です。」
+                                </p>
+                            </div>
+                            <div class="voice-card-footer">
+                                <span class="voice-product">サロンで採用</span>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="voice-card fade-in-up delay-1">
-                        <div class="voice-rating">
-                            <span>★★★★★</span>
-                        </div>
-                        <p class="voice-text">
-                            「サロン専売品なので信頼できます。
-                            オイルなのにベタつかず、
-                            自然な艶が出るのがお気に入り。
-                            周りから髪を褒められるようになりました。」
-                        </p>
-                        <div class="voice-author">
-                            <span class="author-info">30代・主婦</span>
-                            <span class="author-product">ヘアリペアオイル愛用</span>
-                        </div>
-                    </div>
-
-                    <div class="voice-card fade-in-up delay-2">
-                        <div class="voice-rating">
-                            <span>★★★★★</span>
-                        </div>
-                        <p class="voice-text">
-                            「年齢とともに髪のパサつきが気になっていました。
-                            シャンプーとトリートメントのライン使いで、
-                            髪質が変わったように感じます。」
-                        </p>
-                        <div class="voice-author">
-                            <span class="author-info">50代・自営業</span>
-                            <span class="author-product">ライン使い愛用</span>
-                        </div>
+                    <div class="voice-nav">
+                        <button class="voice-nav-btn prev" id="voicePrev" aria-label="前へ">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M15 18l-6-6 6-6"/>
+                            </svg>
+                        </button>
+                        <button class="voice-nav-btn next" id="voiceNext" aria-label="次へ">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 18l6-6-6-6"/>
+                            </svg>
+                        </button>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- ブランドセクション -->
-        <section id="about" class="about section">
-            <div class="about-bg"></div>
+        <!-- Instagram風ギャラリー -->
+        <section id="gallery" class="gallery section">
             <div class="container">
-                <div class="about-inner">
-                    <div class="about-content fade-in-left">
-                        <span class="section-label">About SISUI</span>
-                        <h2 class="section-title">
-                            すべての女性に<br>
-                            艶髪を届けたい
-                        </h2>
-                        <p class="about-text">
-                            SISUIは、髪質改善サロンの<br>
-                            専門知識から生まれたブランドです。
+                <div class="section-header-center fade-in">
+                    <span class="section-label">#SISUI_beauty</span>
+                    <h2 class="section-title">みんなの艶髪</h2>
+                </div>
+
+                <div class="gallery-grid">
+                    <div class="gallery-item fade-in-up">
+                        <div class="img-placeholder img-gallery-1"><span>User Photo 1</span></div>
+                    </div>
+                    <div class="gallery-item fade-in-up delay-1">
+                        <div class="img-placeholder img-gallery-2"><span>User Photo 2</span></div>
+                    </div>
+                    <div class="gallery-item fade-in-up delay-2">
+                        <div class="img-placeholder img-gallery-3"><span>User Photo 3</span></div>
+                    </div>
+                    <div class="gallery-item fade-in-up delay-3">
+                        <div class="img-placeholder img-gallery-4"><span>User Photo 4</span></div>
+                    </div>
+                    <div class="gallery-item fade-in-up delay-4">
+                        <div class="img-placeholder img-gallery-5"><span>User Photo 5</span></div>
+                    </div>
+                    <div class="gallery-item fade-in-up delay-5">
+                        <div class="img-placeholder img-gallery-6"><span>User Photo 6</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ セクション -->
+        <section id="faq" class="faq section">
+            <div class="container">
+                <div class="faq-layout">
+                    <div class="faq-header fade-in-left">
+                        <span class="section-number">06</span>
+                        <span class="section-label">FAQ</span>
+                        <h2 class="section-title">よくある質問</h2>
+                        <p class="faq-contact">
+                            お探しの回答がない場合は<br>
+                            <a href="#">お問い合わせ</a>ください。
                         </p>
-                        <p class="about-text">
-                            サロンでの施術だけでなく、<br>
-                            日々のホームケアにもプロの品質を。<br>
-                            「翠」のブランドカラーには、<br>
-                            自然の生命力と健康的な美しさへの<br>
-                            想いが込められています。
-                        </p>
-                        <div class="about-values">
-                            <div class="value-item">
-                                <span class="value-label">Brand Color</span>
-                                <span class="value-name">翠 - MIDORI</span>
-                            </div>
-                            <div class="value-item">
-                                <span class="value-label">Philosophy</span>
-                                <span class="value-name">美しい艶髪を、すべての人に</span>
+                    </div>
+
+                    <div class="faq-list fade-in-right">
+                        <div class="faq-item">
+                            <button class="faq-question" aria-expanded="false">
+                                <span>敏感肌でも使えますか？</span>
+                                <span class="faq-icon"></span>
+                            </button>
+                            <div class="faq-answer">
+                                <p>はい、SISUIの製品は敏感肌の方にもお使いいただけるよう、低刺激処方で設計されています。ただし、すべての方に刺激が起きないわけではありませんので、心配な方はパッチテストを行ってからご使用ください。</p>
                             </div>
                         </div>
-                    </div>
-                    <div class="about-image fade-in-right">
-                        <div class="about-image-frame">
-                            <div class="about-image-placeholder">
-                                <span>ブランドイメージ</span>
+
+                        <div class="faq-item">
+                            <button class="faq-question" aria-expanded="false">
+                                <span>どのくらいで効果を実感できますか？</span>
+                                <span class="faq-icon"></span>
+                            </button>
+                            <div class="faq-answer">
+                                <p>多くのお客様が1回目の使用から髪の手触りの変化を実感されています。継続してお使いいただくことで、より効果を感じていただけます。特にヘアリペアミストは、使い続けることで髪の補修効果が蓄積されていきます。</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <button class="faq-question" aria-expanded="false">
+                                <span>カラーやパーマをした髪にも使えますか？</span>
+                                <span class="faq-icon"></span>
+                            </button>
+                            <div class="faq-answer">
+                                <p>はい、カラーやパーマをされた髪にもお使いいただけます。むしろ、ダメージを受けた髪のケアに最適です。カラーの持ちを良くし、パーマの形状を維持しながら、髪を補修します。</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <button class="faq-question" aria-expanded="false">
+                                <span>定期便はいつでも解約できますか？</span>
+                                <span class="faq-icon"></span>
+                            </button>
+                            <div class="faq-answer">
+                                <p>はい、定期便は回数の縛りがなく、いつでも解約・休止が可能です。次回お届け予定日の7日前までにマイページまたはお電話にてお手続きください。</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <button class="faq-question" aria-expanded="false">
+                                <span>サロンでも購入できますか？</span>
+                                <span class="faq-icon"></span>
+                            </button>
+                            <div class="faq-answer">
+                                <p>はい、全国500以上のサロンでお取り扱いいただいております。お近くの取扱サロンについては、オンラインショップの「サロン検索」からお探しいただけます。</p>
                             </div>
                         </div>
                     </div>
@@ -499,25 +763,38 @@
 
         <!-- CTAセクション -->
         <section id="cta" class="cta section">
+            <div class="cta-bg">
+                <div class="cta-pattern"></div>
+            </div>
             <div class="container">
-                <div class="cta-content text-center fade-in">
+                <div class="cta-content fade-in">
+                    <span class="cta-label">Start Your Hair Care Journey</span>
                     <h2 class="cta-title">
                         あなたの髪を、<br>
                         もっと美しく。
                     </h2>
                     <p class="cta-text">
-                        SISUIで、サロン品質のホームケアを始めませんか？<br>
-                        定期便なら10〜15%OFF、送料無料でお届けします。
+                        SISUIで、サロン品質のホームケアを始めませんか？
                     </p>
                     <div class="cta-buttons">
-                        <a href="https://sisui-beauty.com/" target="_blank" class="btn btn-primary btn-large">
-                            オンラインショップへ
+                        <a href="https://sisui-beauty.com/" target="_blank" class="btn btn-white btn-large">
+                            <span class="btn-text">オンラインショップへ</span>
+                            <span class="btn-icon">→</span>
                         </a>
                     </div>
                     <div class="cta-benefits">
-                        <span class="benefit">定期便10〜15%OFF</span>
-                        <span class="benefit">5,000円以上送料無料</span>
-                        <span class="benefit">いつでも解約OK</span>
+                        <div class="benefit-item">
+                            <span class="benefit-icon">✓</span>
+                            <span>定期便10〜15%OFF</span>
+                        </div>
+                        <div class="benefit-item">
+                            <span class="benefit-icon">✓</span>
+                            <span>5,000円以上送料無料</span>
+                        </div>
+                        <div class="benefit-item">
+                            <span class="benefit-icon">✓</span>
+                            <span>いつでも解約OK</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -526,51 +803,68 @@
 
     <!-- フッター -->
     <footer class="footer">
-        <div class="container">
-            <div class="footer-inner">
-                <div class="footer-brand">
-                    <a href="#" class="footer-logo">
-                        <span class="logo-text">SISUI</span>
-                        <span class="logo-sub">シスイ</span>
-                    </a>
-                    <p class="footer-tagline">美しい艶髪を、あなたに。</p>
-                </div>
+        <div class="footer-top">
+            <div class="container">
+                <div class="footer-grid">
+                    <div class="footer-brand">
+                        <a href="#" class="footer-logo">
+                            <span class="logo-text">SISUI</span>
+                            <span class="logo-sub">シスイ</span>
+                        </a>
+                        <p class="footer-tagline">美しい艶髪を、あなたに。</p>
+                        <p class="footer-desc">
+                            髪質改善サロン専売品ブランド。<br>
+                            プロが認める品質をご自宅で。
+                        </p>
+                    </div>
 
-                <div class="footer-nav">
-                    <div class="footer-nav-group">
-                        <h4>メニュー</h4>
-                        <ul>
-                            <li><a href="#concept">コンセプト</a></li>
-                            <li><a href="#products">商品一覧</a></li>
-                            <li><a href="#features">特徴</a></li>
-                            <li><a href="#voice">お客様の声</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-nav-group">
-                        <h4>ショップ</h4>
-                        <ul>
-                            <li><a href="https://sisui-beauty.com/" target="_blank">オンラインショップ</a></li>
-                            <li><a href="https://sisui-beauty.com/" target="_blank">会員登録</a></li>
-                            <li><a href="https://sisui-beauty.com/" target="_blank">定期便について</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-nav-group">
-                        <h4>サポート</h4>
-                        <ul>
-                            <li><a href="#">よくある質問</a></li>
-                            <li><a href="#">お問い合わせ</a></li>
-                            <li><a href="#">プライバシーポリシー</a></li>
-                            <li><a href="#">特定商取引法に基づく表記</a></li>
-                        </ul>
+                    <div class="footer-nav">
+                        <div class="footer-nav-group">
+                            <h4>メニュー</h4>
+                            <ul>
+                                <li><a href="#concept">コンセプト</a></li>
+                                <li><a href="#products">商品一覧</a></li>
+                                <li><a href="#ingredients">こだわり成分</a></li>
+                                <li><a href="#voice">お客様の声</a></li>
+                                <li><a href="#faq">よくある質問</a></li>
+                            </ul>
+                        </div>
+                        <div class="footer-nav-group">
+                            <h4>ショップ</h4>
+                            <ul>
+                                <li><a href="https://sisui-beauty.com/" target="_blank">オンラインショップ</a></li>
+                                <li><a href="https://sisui-beauty.com/" target="_blank">会員登録</a></li>
+                                <li><a href="https://sisui-beauty.com/" target="_blank">定期便について</a></li>
+                                <li><a href="#">取扱サロン検索</a></li>
+                            </ul>
+                        </div>
+                        <div class="footer-nav-group">
+                            <h4>サポート</h4>
+                            <ul>
+                                <li><a href="#">お問い合わせ</a></li>
+                                <li><a href="#">プライバシーポリシー</a></li>
+                                <li><a href="#">特定商取引法に基づく表記</a></li>
+                                <li><a href="#">利用規約</a></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div class="footer-bottom">
+        <div class="footer-bottom">
+            <div class="container">
                 <p class="copyright">&copy; 2025 SISUI. All Rights Reserved.</p>
             </div>
         </div>
     </footer>
+
+    <!-- トップへ戻るボタン -->
+    <button class="back-to-top" id="backToTop" aria-label="トップへ戻る">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 15l-6-6-6 6"/>
+        </svg>
+    </button>
 
     <!-- JavaScript -->
     <script src="js/main.js"></script>
