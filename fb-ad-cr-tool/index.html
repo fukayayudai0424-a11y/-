@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="CR制作システム v7.0 - Meta広告の「タップさせるCR」を作る専門AIツール">
+    <title>CR制作システム v7.0 | FB広告クリエイティブ制作ツール</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- ローディング画面 -->
+    <div id="loading" class="loading">
+        <div class="loading-content">
+            <div class="loading-logo">CR System</div>
+            <div class="loading-version">v7.0</div>
+            <div class="loading-bar-container">
+                <div class="loading-bar"></div>
+            </div>
+            <div class="loading-text">システムを初期化中...</div>
+        </div>
+    </div>
+
+    <!-- ヘッダー -->
+    <header class="header">
+        <div class="header-inner">
+            <div class="logo">
+                <span class="logo-icon">
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                        <rect width="32" height="32" rx="8" fill="url(#logoGrad)"/>
+                        <path d="M8 16L14 22L24 10" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                        <defs>
+                            <linearGradient id="logoGrad" x1="0" y1="0" x2="32" y2="32">
+                                <stop offset="0%" stop-color="#667eea"/>
+                                <stop offset="100%" stop-color="#764ba2"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </span>
+                <div class="logo-text">
+                    <span class="logo-main">CR制作システム</span>
+                    <span class="logo-sub">v7.0</span>
+                </div>
+            </div>
+            <nav class="nav">
+                <a href="#" class="nav-link active" data-section="input">入力</a>
+                <a href="#" class="nav-link" data-section="process">プロセス</a>
+                <a href="#" class="nav-link" data-section="output">出力</a>
+            </nav>
+            <div class="header-actions">
+                <button class="btn btn-ghost" id="resetBtn">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M2 8a6 6 0 1 1 1.5 3.97" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        <path d="M2 12V8h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    リセット
+                </button>
+                <button class="btn btn-primary" id="exportBtn" disabled>
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M8 2v8M4 6l4 4 4-4M2 14h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    エクスポート
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- メインコンテンツ -->
+    <main class="main">
+        <!-- サイドバー：進捗 -->
+        <aside class="sidebar">
+            <div class="progress-header">
+                <h3>進捗状況</h3>
+                <span class="progress-percent" id="progressPercent">0%</span>
+            </div>
+            <div class="progress-bar-main">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <div class="phase-list">
+                <!-- PHASE 1 -->
+                <div class="phase" data-phase="1">
+                    <div class="phase-header">
+                        <span class="phase-icon pending"></span>
+                        <span class="phase-title">PHASE 1: N1ディープダイブ</span>
+                    </div>
+                    <div class="round-list">
+                        <div class="round" data-round="1">
+                            <span class="round-status"></span>
+                            <span class="round-name">Round 1: N1ランダム生成</span>
+                        </div>
+                        <div class="round" data-round="2">
+                            <span class="round-status"></span>
+                            <span class="round-name">Round 2: 本音・シーン深掘り</span>
+                        </div>
+                        <div class="round" data-round="3">
+                            <span class="round-status"></span>
+                            <span class="round-name">Round 3: 勝ち筋決定</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- PHASE 2 -->
+                <div class="phase" data-phase="2">
+                    <div class="phase-header">
+                        <span class="phase-icon pending"></span>
+                        <span class="phase-title">PHASE 2: コンセプト開発</span>
+                    </div>
+                    <div class="round-list">
+                        <div class="round" data-round="4">
+                            <span class="round-status"></span>
+                            <span class="round-name">Round 4: 10案ブレスト</span>
+                        </div>
+                        <div class="round" data-round="5">
+                            <span class="round-status"></span>
+                            <span class="round-name">Round 5: 5案絞り込み</span>
+                        </div>
+                        <div class="round" data-round="6">
+                            <span class="round-status"></span>
+                            <span class="round-name">Round 6: コピー開発</span>
+                        </div>
+                        <div class="round" data-round="7">
+                            <span class="round-status"></span>
+                            <span class="round-name">Round 7: ビジュアル設計</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- PHASE 3 -->
+                <div class="phase" data-phase="3">
+                    <div class="phase-header">
+                        <span class="phase-icon pending"></span>
+                        <span class="phase-title">PHASE 3: 検証・改善</span>
+                    </div>
+                    <div class="round-list">
+                        <div class="round" data-round="8">
+                            <span class="round-status"></span>
+                            <span class="round-name">Round 8: 行ごとチェック</span>
+                        </div>
+                        <div class="round" data-round="9">
+                            <span class="round-status"></span>
+                            <span class="round-name">Round 9: 3トリガーチェック</span>
+                        </div>
+                        <div class="round" data-round="10">
+                            <span class="round-status"></span>
+                            <span class="round-name">Round 10: AIバトル</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- PHASE 4 -->
+                <div class="phase" data-phase="4">
+                    <div class="phase-header">
+                        <span class="phase-icon pending"></span>
+                        <span class="phase-title">PHASE 4: 最終出力</span>
+                    </div>
+                    <div class="round-list">
+                        <div class="round" data-round="11">
+                            <span class="round-status"></span>
+                            <span class="round-name">Round 11: タップテスト</span>
+                        </div>
+                        <div class="round" data-round="12">
+                            <span class="round-status"></span>
+                            <span class="round-name">Round 12: TOP5確定</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- コンテンツエリア -->
+        <div class="content">
+            <!-- 入力セクション -->
+            <section id="inputSection" class="section active">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <span class="section-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                <rect x="9" y="3" width="6" height="4" rx="1" stroke="currentColor" stroke-width="2"/>
+                                <path d="M9 12h6M9 16h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </span>
+                        案件情報入力
+                    </h2>
+                    <p class="section-description">
+                        CR制作に必要な情報を入力してください。情報が詳細であるほど、より精度の高いCRが生成されます。
+                    </p>
+                </div>
+
+                <form id="projectForm" class="form">
+                    <!-- 案件概要 -->
+                    <div class="form-card">
+                        <div class="form-card-header">
+                            <h3 class="form-card-title">
+                                <span class="card-number">01</span>
+                                案件概要
+                            </h3>
+                            <span class="required-badge">必須</span>
+                        </div>
+                        <div class="form-card-content">
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="productName">商材名 <span class="required">*</span></label>
+                                    <input type="text" id="productName" name="productName" required placeholder="例: AI副業マスター講座">
+                                </div>
+                                <div class="form-group">
+                                    <label for="productGenre">商材ジャンル <span class="required">*</span></label>
+                                    <select id="productGenre" name="productGenre" required>
+                                        <option value="">選択してください</option>
+                                        <option value="物販">物販</option>
+                                        <option value="投資">投資</option>
+                                        <option value="スキル系">スキル系</option>
+                                        <option value="美容">美容</option>
+                                        <option value="健康">健康</option>
+                                        <option value="その他">その他</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="productFeatures">商材の特徴（3つ以上） <span class="required">*</span></label>
+                                <textarea id="productFeatures" name="productFeatures" required rows="4" placeholder="・AIが自動でリサーチ&#10;・週30分の作業時間&#10;・初心者でも再現性90%以上"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="funnelStructure">ファネル構造 <span class="required">*</span></label>
+                                <input type="text" id="funnelStructure" name="funnelStructure" required placeholder="例: 広告 → LP → LINE登録 → セミナー → 個別相談">
+                            </div>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="priceFront">フロントエンド価格</label>
+                                    <input type="text" id="priceFront" name="priceFront" placeholder="例: 無料 or ¥980">
+                                </div>
+                                <div class="form-group">
+                                    <label for="priceBack">バックエンド価格</label>
+                                    <input type="text" id="priceBack" name="priceBack" placeholder="例: ¥298,000">
+                                </div>
+                            </div>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="adPlatform">配信先 <span class="required">*</span></label>
+                                    <select id="adPlatform" name="adPlatform" required>
+                                        <option value="">選択してください</option>
+                                        <option value="Meta広告" selected>Meta広告（Facebook/Instagram）</option>
+                                        <option value="TikTok">TikTok</option>
+                                        <option value="YouTube">YouTube</option>
+                                        <option value="X">X（Twitter）</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="targetCPA">目標CPA <span class="required">*</span></label>
+                                    <input type="text" id="targetCPA" name="targetCPA" required placeholder="例: ¥3,000">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 講師・提供者情報 -->
+                    <div class="form-card">
+                        <div class="form-card-header">
+                            <h3 class="form-card-title">
+                                <span class="card-number">02</span>
+                                講師・提供者情報
+                            </h3>
+                            <span class="optional-badge">任意</span>
+                        </div>
+                        <div class="form-card-content">
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="instructorName">名前</label>
+                                    <input type="text" id="instructorName" name="instructorName" placeholder="例: 山田太郎">
+                                </div>
+                                <div class="form-group">
+                                    <label for="instructorCareer">経歴</label>
+                                    <input type="text" id="instructorCareer" name="instructorCareer" placeholder="例: 元大手商社勤務、10年間の物販経験">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="instructorResults">実績（数字で）</label>
+                                <textarea id="instructorResults" name="instructorResults" rows="3" placeholder="例:&#10;・累計売上5億円&#10;・受講生1,000人以上&#10;・成功率85%"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="instructorStory">ストーリー（Before→After）</label>
+                                <textarea id="instructorStory" name="instructorStory" rows="3" placeholder="例: 会社員時代は残業漬けで年収400万円。副業を始めて3年で月収300万円を達成。現在は完全独立し、海外ノマドワーカーとして活動中。"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ターゲット情報 -->
+                    <div class="form-card">
+                        <div class="form-card-header">
+                            <h3 class="form-card-title">
+                                <span class="card-number">03</span>
+                                ターゲット情報
+                            </h3>
+                            <span class="required-badge">必須</span>
+                        </div>
+                        <div class="form-card-content">
+                            <div class="form-grid form-grid-4">
+                                <div class="form-group">
+                                    <label for="targetAge">年齢層 <span class="required">*</span></label>
+                                    <input type="text" id="targetAge" name="targetAge" required placeholder="例: 30-45歳">
+                                </div>
+                                <div class="form-group">
+                                    <label for="targetGender">性別 <span class="required">*</span></label>
+                                    <select id="targetGender" name="targetGender" required>
+                                        <option value="">選択</option>
+                                        <option value="男性">男性</option>
+                                        <option value="女性">女性</option>
+                                        <option value="両方">両方</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="targetJob">職業 <span class="required">*</span></label>
+                                    <input type="text" id="targetJob" name="targetJob" required placeholder="例: 会社員">
+                                </div>
+                                <div class="form-group">
+                                    <label for="targetIncome">年収帯</label>
+                                    <input type="text" id="targetIncome" name="targetIncome" placeholder="例: 400-600万円">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="targetPains">悩み（3つ以上） <span class="required">*</span></label>
+                                <textarea id="targetPains" name="targetPains" required rows="4" placeholder="・給料が上がらない&#10;・将来が不安&#10;・副業に興味はあるが時間がない&#10;・何から始めていいかわからない"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="targetDesires">欲求（3つ以上） <span class="required">*</span></label>
+                                <textarea id="targetDesires" name="targetDesires" required rows="4" placeholder="・収入を増やしたい&#10;・自由な時間が欲しい&#10;・会社に依存したくない&#10;・家族との時間を増やしたい"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="targetFailures">過去の失敗体験</label>
+                                <textarea id="targetFailures" name="targetFailures" rows="3" placeholder="例: ブログを始めたが3ヶ月で挫折。情報商材を買ったが実践できなかった。"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- USP -->
+                    <div class="form-card">
+                        <div class="form-card-header">
+                            <h3 class="form-card-title">
+                                <span class="card-number">04</span>
+                                USP（独自の強み）
+                            </h3>
+                            <span class="required-badge">必須</span>
+                        </div>
+                        <div class="form-card-content">
+                            <div class="form-group">
+                                <label for="uspDifferences">競合との違い（3つ） <span class="required">*</span></label>
+                                <textarea id="uspDifferences" name="uspDifferences" required rows="4" placeholder="・AIによる完全自動化で作業時間1/10&#10;・30日間の全額返金保証&#10;・24時間対応のチャットサポート"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="uspCore">「これだけは絶対に負けない」1点 <span class="required">*</span></label>
+                                <input type="text" id="uspCore" name="uspCore" required placeholder="例: AI自動化による圧倒的な時短">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 競合情報 -->
+                    <div class="form-card">
+                        <div class="form-card-header">
+                            <h3 class="form-card-title">
+                                <span class="card-number">05</span>
+                                競合情報
+                            </h3>
+                            <span class="optional-badge">任意</span>
+                        </div>
+                        <div class="form-card-content">
+                            <div class="form-group">
+                                <label for="competitors">主な競合（3社）</label>
+                                <textarea id="competitors" name="competitors" rows="3" placeholder="・○○塾&#10;・△△スクール&#10;・□□アカデミー"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="competitorCopy">競合がよく使う訴求</label>
+                                <textarea id="competitorCopy" name="competitorCopy" rows="3" placeholder="例: 「月収100万円」「誰でも簡単」「コピペで稼げる」"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="competitorCRExamples">競合CRコピー例（あれば）</label>
+                                <textarea id="competitorCRExamples" name="competitorCRExamples" rows="4" placeholder="例:&#10;「【衝撃】副業で月収100万円達成した方法とは？」&#10;「たった1日30分で人生が変わりました」"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 送信ボタン -->
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-ghost btn-lg" id="saveBtn">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path d="M2 2v12h12V5l-3-3H2z" stroke="currentColor" stroke-width="1.5"/>
+                                <path d="M5 2v4h5V2M5 14v-5h6v5" stroke="currentColor" stroke-width="1.5"/>
+                            </svg>
+                            下書き保存
+                        </button>
+                        <button type="submit" class="btn btn-primary btn-lg" id="generateBtn">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path d="M8 1v14M1 8h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                            CR生成を開始
+                        </button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- プロセスセクション -->
+            <section id="processSection" class="section">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <span class="section-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                                <path d="M12 6v6l4 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </span>
+                        CR生成プロセス
+                    </h2>
+                    <div class="process-status">
+                        <span class="status-badge processing">
+                            <span class="status-dot"></span>
+                            処理中...
+                        </span>
+                        <span class="current-round">Round <span id="currentRoundNum">1</span> / 12</span>
+                    </div>
+                </div>
+
+                <!-- プロセス出力エリア -->
+                <div class="process-output" id="processOutput">
+                    <div class="process-placeholder">
+                        <div class="placeholder-icon">
+                            <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                                <circle cx="24" cy="24" r="20" stroke="currentColor" stroke-width="2" stroke-dasharray="4 4"/>
+                                <path d="M24 16v16M16 24h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <p>案件情報を入力して「CR生成を開始」をクリックしてください</p>
+                    </div>
+                </div>
+
+                <!-- AI議論パネル -->
+                <div class="ai-panel" id="aiPanel">
+                    <div class="ai-panel-header">
+                        <h4>AI議論パネル</h4>
+                        <button class="btn btn-icon" id="toggleAiPanel">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="ai-panel-content">
+                        <div class="ai-avatars">
+                            <div class="ai-avatar" data-name="神田昌典" data-role="市場分析">
+                                <div class="avatar-img">神</div>
+                                <span class="avatar-name">神田昌典</span>
+                            </div>
+                            <div class="ai-avatar" data-name="佐藤可士和" data-role="コンセプト">
+                                <div class="avatar-img">佐</div>
+                                <span class="avatar-name">佐藤可士和</span>
+                            </div>
+                            <div class="ai-avatar" data-name="大竹聡" data-role="コピー">
+                                <div class="avatar-img">大</div>
+                                <span class="avatar-name">大竹聡</span>
+                            </div>
+                            <div class="ai-avatar" data-name="田端信太郎" data-role="運用">
+                                <div class="avatar-img">田</div>
+                                <span class="avatar-name">田端信太郎</span>
+                            </div>
+                            <div class="ai-avatar highlight" data-name="ひろゆき" data-role="批評">
+                                <div class="avatar-img">ひ</div>
+                                <span class="avatar-name">ひろゆき</span>
+                            </div>
+                            <div class="ai-avatar" data-name="栗原康太" data-role="ロジック">
+                                <div class="avatar-img">栗</div>
+                                <span class="avatar-name">栗原康太</span>
+                            </div>
+                            <div class="ai-avatar" data-name="山本琢磨" data-role="心理学">
+                                <div class="avatar-img">山</div>
+                                <span class="avatar-name">山本琢磨</span>
+                            </div>
+                            <div class="ai-avatar" data-name="ホリエモン" data-role="現実">
+                                <div class="avatar-img">堀</div>
+                                <span class="avatar-name">ホリエモン</span>
+                            </div>
+                            <div class="ai-avatar master" data-name="秋元康" data-role="統括">
+                                <div class="avatar-img">秋</div>
+                                <span class="avatar-name">秋元康</span>
+                            </div>
+                        </div>
+                        <div class="ai-discussion" id="aiDiscussion">
+                            <!-- AI議論がここに表示される -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 出力セクション -->
+            <section id="outputSection" class="section">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <span class="section-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </span>
+                        CR TOP5 最終出力
+                    </h2>
+                </div>
+
+                <!-- N1サマリー -->
+                <div class="output-card" id="n1Summary">
+                    <div class="output-card-header">
+                        <h3>N1ペルソナ（顕在度別5人）</h3>
+                    </div>
+                    <div class="output-card-content">
+                        <div class="n1-grid" id="n1Grid">
+                            <!-- N1がここに表示される -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CR TOP5 -->
+                <div class="cr-results" id="crResults">
+                    <!-- 顕在層向け -->
+                    <div class="cr-category">
+                        <div class="cr-category-header">
+                            <h3>
+                                <span class="category-badge manifest">顕在層向け</span>
+                                CPA確認用 2案
+                            </h3>
+                        </div>
+                        <div class="cr-list" id="crListManifest">
+                            <!-- CRがここに表示される -->
+                        </div>
+                    </div>
+
+                    <!-- 潜在層向け -->
+                    <div class="cr-category important">
+                        <div class="cr-category-header">
+                            <h3>
+                                <span class="category-badge latent">潜在層向け</span>
+                                スケール用 3案
+                            </h3>
+                            <span class="important-badge">重要</span>
+                        </div>
+                        <div class="cr-list" id="crListLatent">
+                            <!-- CRがここに表示される -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 運用提案 -->
+                <div class="output-card" id="operationPlan">
+                    <div class="output-card-header">
+                        <h3>運用提案</h3>
+                    </div>
+                    <div class="output-card-content" id="operationContent">
+                        <!-- 運用提案がここに表示される -->
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- コピー用モーダル -->
+    <div class="modal" id="copyModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>プロンプトをコピー</h3>
+                <button class="btn btn-icon" id="closeModal">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <textarea id="promptText" readonly></textarea>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" id="copyPromptBtn">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <rect x="5" y="5" width="9" height="9" rx="1" stroke="currentColor" stroke-width="1.5"/>
+                        <path d="M11 5V3a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h2" stroke="currentColor" stroke-width="1.5"/>
+                    </svg>
+                    クリップボードにコピー
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- トースト通知 -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- JavaScript -->
+    <script src="js/app.js"></script>
+</body>
+</html>
