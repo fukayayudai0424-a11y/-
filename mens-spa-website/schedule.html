@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="LUXE SPA - 本日の出勤スケジュール。セラピストの出勤情報をリアルタイムでご確認いただけます。">
+  <title>出勤スケジュール | LUXE SPA - 都内最高峰メンズエステサロン</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="header" id="header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <span class="logo-main">LUXE SPA</span>
+        <span class="logo-sub">PREMIUM MEN'S ESTHETIC</span>
+      </a>
+
+      <nav class="nav">
+        <ul class="nav-list">
+          <li><a href="index.html" class="nav-link">TOP</a></li>
+          <li><a href="index.html#concept" class="nav-link">CONCEPT</a></li>
+          <li><a href="system.html" class="nav-link">SYSTEM</a></li>
+          <li><a href="therapist.html" class="nav-link">THERAPIST</a></li>
+          <li><a href="schedule.html" class="nav-link">SCHEDULE</a></li>
+          <li><a href="access.html" class="nav-link">ACCESS</a></li>
+          <li><a href="recruit.html" class="nav-link">RECRUIT</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-contact">
+        <div class="header-tel">
+          <span class="header-tel-number">03-XXXX-XXXX</span>
+          <span class="header-tel-time">受付 12:00〜翌3:00</span>
+        </div>
+        <a href="index.html#reserve" class="header-reserve-btn">ご予約</a>
+      </div>
+
+      <div class="menu-toggle" id="menuToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Navigation -->
+  <div class="mobile-nav-overlay" id="mobileNavOverlay"></div>
+  <nav class="mobile-nav" id="mobileNav">
+    <ul class="mobile-nav-list">
+      <li><a href="index.html" class="mobile-nav-link">TOP</a></li>
+      <li><a href="index.html#concept" class="mobile-nav-link">CONCEPT</a></li>
+      <li><a href="system.html" class="mobile-nav-link">SYSTEM</a></li>
+      <li><a href="therapist.html" class="mobile-nav-link">THERAPIST</a></li>
+      <li><a href="schedule.html" class="mobile-nav-link">SCHEDULE</a></li>
+      <li><a href="access.html" class="mobile-nav-link">ACCESS</a></li>
+      <li><a href="recruit.html" class="mobile-nav-link">RECRUIT</a></li>
+    </ul>
+    <div class="mobile-nav-contact">
+      <a href="tel:03-XXXX-XXXX" class="mobile-nav-tel">03-XXXX-XXXX</a>
+      <p class="mobile-nav-time">受付 12:00〜翌3:00</p>
+      <a href="index.html#reserve" class="mobile-nav-btn">ご予約はこちら</a>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <section class="page-header">
+    <div class="page-header-content">
+      <h1 class="page-title">SCHEDULE</h1>
+      <p class="page-subtitle">出勤スケジュール</p>
+      <nav class="breadcrumb">
+        <a href="index.html">TOP</a>
+        <span>/</span>
+        <span class="breadcrumb-current">SCHEDULE</span>
+      </nav>
+    </div>
+  </section>
+
+  <!-- Date Navigation -->
+  <section class="section section-light" style="padding: 40px 0;">
+    <div class="container">
+      <div style="display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-bottom: 30px;">
+        <button class="schedule-tab active">1/22(水)</button>
+        <button class="schedule-tab">1/23(木)</button>
+        <button class="schedule-tab">1/24(金)</button>
+        <button class="schedule-tab">1/25(土)</button>
+        <button class="schedule-tab">1/26(日)</button>
+        <button class="schedule-tab">1/27(月)</button>
+        <button class="schedule-tab">1/28(火)</button>
+      </div>
+      <div style="display: flex; justify-content: center; gap: 15px;">
+        <button class="schedule-tab active" data-shop="ginza">銀座店</button>
+        <button class="schedule-tab" data-shop="shinjuku">新宿店</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Today's Schedule - Ginza -->
+  <section class="section" id="ginza-schedule">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">GINZA</h2>
+        <p class="section-subtitle">銀座店 - 本日の出勤</p>
+      </div>
+      <p style="text-align: center; margin-bottom: 40px; font-family: var(--font-family-en); font-size: 1.3rem; color: var(--secondary-color);">
+        2025.01.22 (Wed)
+      </p>
+      <div class="schedule-grid">
+        <div class="schedule-card fade-in">
+          <div class="schedule-card-image">
+            <span class="schedule-card-placeholder">PHOTO</span>
+            <span class="schedule-card-status available">空きあり</span>
+          </div>
+          <div class="schedule-card-info">
+            <h4 class="schedule-card-name">美咲 <span style="font-size: 0.7rem; background: var(--accent-color); color: white; padding: 2px 6px; border-radius: 3px; margin-left: 5px;">NEW</span></h4>
+            <p class="schedule-card-time">
+              <span class="schedule-card-time-icon">&#9200;</span>
+              12:00 - 22:00
+            </p>
+            <p style="font-size: 0.8rem; color: var(--text-light); margin-top: 5px;">次回案内可能: 14:00〜</p>
+          </div>
+        </div>
+        <div class="schedule-card fade-in">
+          <div class="schedule-card-image">
+            <span class="schedule-card-placeholder">PHOTO</span>
+            <span class="schedule-card-status few">残りわずか</span>
+          </div>
+          <div class="schedule-card-info">
+            <h4 class="schedule-card-name">あかり</h4>
+            <p class="schedule-card-time">
+              <span class="schedule-card-time-icon">&#9200;</span>
+              14:00 - 24:00
+            </p>
+            <p style="font-size: 0.8rem; color: var(--text-light); margin-top: 5px;">次回案内可能: 18:00〜</p>
+          </div>
+        </div>
+        <div class="schedule-card fade-in">
+          <div class="schedule-card-image">
+            <span class="schedule-card-placeholder">PHOTO</span>
+            <span class="schedule-card-status busy">満枠</span>
+          </div>
+          <div class="schedule-card-info">
+            <h4 class="schedule-card-name">ひなた <span style="font-size: 0.7rem; background: #4CAF50; color: white; padding: 2px 6px; border-radius: 3px; margin-left: 5px;">PICK UP</span></h4>
+            <p class="schedule-card-time">
+              <span class="schedule-card-time-icon">&#9200;</span>
+              12:00 - 20:00
+            </p>
+            <p style="font-size: 0.8rem; color: #f44336; margin-top: 5px;">本日の予約は終了しました</p>
+          </div>
+        </div>
+        <div class="schedule-card fade-in">
+          <div class="schedule-card-image">
+            <span class="schedule-card-placeholder">PHOTO</span>
+            <span class="schedule-card-status available">空きあり</span>
+          </div>
+          <div class="schedule-card-info">
+            <h4 class="schedule-card-name">りお</h4>
+            <p class="schedule-card-time">
+              <span class="schedule-card-time-icon">&#9200;</span>
+              16:00 - 翌2:00
+            </p>
+            <p style="font-size: 0.8rem; color: var(--text-light); margin-top: 5px;">次回案内可能: 16:00〜</p>
+          </div>
+        </div>
+        <div class="schedule-card fade-in">
+          <div class="schedule-card-image">
+            <span class="schedule-card-placeholder">PHOTO</span>
+            <span class="schedule-card-status available">空きあり</span>
+          </div>
+          <div class="schedule-card-info">
+            <h4 class="schedule-card-name">なな</h4>
+            <p class="schedule-card-time">
+              <span class="schedule-card-time-icon">&#9200;</span>
+              12:00 - 22:00
+            </p>
+            <p style="font-size: 0.8rem; color: var(--text-light); margin-top: 5px;">次回案内可能: 13:30〜</p>
+          </div>
+        </div>
+        <div class="schedule-card fade-in">
+          <div class="schedule-card-image">
+            <span class="schedule-card-placeholder">PHOTO</span>
+            <span class="schedule-card-status few">残りわずか</span>
+          </div>
+          <div class="schedule-card-info">
+            <h4 class="schedule-card-name">りな</h4>
+            <p class="schedule-card-time">
+              <span class="schedule-card-time-icon">&#9200;</span>
+              18:00 - 翌3:00
+            </p>
+            <p style="font-size: 0.8rem; color: var(--text-light); margin-top: 5px;">次回案内可能: 21:00〜</p>
+          </div>
+        </div>
+        <div class="schedule-card fade-in">
+          <div class="schedule-card-image">
+            <span class="schedule-card-placeholder">PHOTO</span>
+            <span class="schedule-card-status available">空きあり</span>
+          </div>
+          <div class="schedule-card-info">
+            <h4 class="schedule-card-name">めい</h4>
+            <p class="schedule-card-time">
+              <span class="schedule-card-time-icon">&#9200;</span>
+              14:00 - 22:00
+            </p>
+            <p style="font-size: 0.8rem; color: var(--text-light); margin-top: 5px;">次回案内可能: 15:30〜</p>
+          </div>
+        </div>
+        <div class="schedule-card fade-in">
+          <div class="schedule-card-image">
+            <span class="schedule-card-placeholder">PHOTO</span>
+            <span class="schedule-card-status available">空きあり</span>
+          </div>
+          <div class="schedule-card-info">
+            <h4 class="schedule-card-name">ゆい <span style="font-size: 0.7rem; background: var(--accent-color); color: white; padding: 2px 6px; border-radius: 3px; margin-left: 5px;">NEW</span></h4>
+            <p class="schedule-card-time">
+              <span class="schedule-card-time-icon">&#9200;</span>
+              12:00 - 20:00
+            </p>
+            <p style="font-size: 0.8rem; color: var(--text-light); margin-top: 5px;">次回案内可能: 12:00〜</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Today's Schedule - Shinjuku -->
+  <section class="section section-light" id="shinjuku-schedule">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">SHINJUKU</h2>
+        <p class="section-subtitle">新宿店 - 本日の出勤</p>
+      </div>
+      <p style="text-align: center; margin-bottom: 40px; font-family: var(--font-family-en); font-size: 1.3rem; color: var(--secondary-color);">
+        2025.01.22 (Wed)
+      </p>
+      <div class="schedule-grid">
+        <div class="schedule-card fade-in">
+          <div class="schedule-card-image">
+            <span class="schedule-card-placeholder">PHOTO</span>
+            <span class="schedule-card-status available">空きあり</span>
+          </div>
+          <div class="schedule-card-info">
+            <h4 class="schedule-card-name">はな <span style="font-size: 0.7rem; background: #4CAF50; color: white; padding: 2px 6px; border-radius: 3px; margin-left: 5px;">PICK UP</span></h4>
+            <p class="schedule-card-time">
+              <span class="schedule-card-time-icon">&#9200;</span>
+              12:00 - 24:00
+            </p>
+            <p style="font-size: 0.8rem; color: var(--text-light); margin-top: 5px;">次回案内可能: 14:30〜</p>
+          </div>
+        </div>
+        <div class="schedule-card fade-in">
+          <div class="schedule-card-image">
+            <span class="schedule-card-placeholder">PHOTO</span>
+            <span class="schedule-card-status available">空きあり</span>
+          </div>
+          <div class="schedule-card-info">
+            <h4 class="schedule-card-name">あおい</h4>
+            <p class="schedule-card-time">
+              <span class="schedule-card-time-icon">&#9200;</span>
+              14:00 - 翌2:00
+            </p>
+            <p style="font-size: 0.8rem; color: var(--text-light); margin-top: 5px;">次回案内可能: 14:00〜</p>
+          </div>
+        </div>
+        <div class="schedule-card fade-in">
+          <div class="schedule-card-image">
+            <span class="schedule-card-placeholder">PHOTO</span>
+            <span class="schedule-card-status few">残りわずか</span>
+          </div>
+          <div class="schedule-card-info">
+            <h4 class="schedule-card-name">ゆうき</h4>
+            <p class="schedule-card-time">
+              <span class="schedule-card-time-icon">&#9200;</span>
+              12:00 - 22:00
+            </p>
+            <p style="font-size: 0.8rem; color: var(--text-light); margin-top: 5px;">次回案内可能: 19:00〜</p>
+          </div>
+        </div>
+        <div class="schedule-card fade-in">
+          <div class="schedule-card-image">
+            <span class="schedule-card-placeholder">PHOTO</span>
+            <span class="schedule-card-status busy">満枠</span>
+          </div>
+          <div class="schedule-card-info">
+            <h4 class="schedule-card-name">そら</h4>
+            <p class="schedule-card-time">
+              <span class="schedule-card-time-icon">&#9200;</span>
+              12:00 - 20:00
+            </p>
+            <p style="font-size: 0.8rem; color: #f44336; margin-top: 5px;">本日の予約は終了しました</p>
+          </div>
+        </div>
+        <div class="schedule-card fade-in">
+          <div class="schedule-card-image">
+            <span class="schedule-card-placeholder">PHOTO</span>
+            <span class="schedule-card-status available">空きあり</span>
+          </div>
+          <div class="schedule-card-info">
+            <h4 class="schedule-card-name">かな</h4>
+            <p class="schedule-card-time">
+              <span class="schedule-card-time-icon">&#9200;</span>
+              16:00 - 翌4:00
+            </p>
+            <p style="font-size: 0.8rem; color: var(--text-light); margin-top: 5px;">次回案内可能: 16:00〜</p>
+          </div>
+        </div>
+        <div class="schedule-card fade-in">
+          <div class="schedule-card-image">
+            <span class="schedule-card-placeholder">PHOTO</span>
+            <span class="schedule-card-status available">空きあり</span>
+          </div>
+          <div class="schedule-card-info">
+            <h4 class="schedule-card-name">りさ</h4>
+            <p class="schedule-card-time">
+              <span class="schedule-card-time-icon">&#9200;</span>
+              18:00 - 翌5:00
+            </p>
+            <p style="font-size: 0.8rem; color: var(--text-light); margin-top: 5px;">次回案内可能: 18:00〜</p>
+          </div>
+        </div>
+        <div class="schedule-card fade-in">
+          <div class="schedule-card-image">
+            <span class="schedule-card-placeholder">PHOTO</span>
+            <span class="schedule-card-status available">空きあり</span>
+          </div>
+          <div class="schedule-card-info">
+            <h4 class="schedule-card-name">さき <span style="font-size: 0.7rem; background: var(--accent-color); color: white; padding: 2px 6px; border-radius: 3px; margin-left: 5px;">NEW</span></h4>
+            <p class="schedule-card-time">
+              <span class="schedule-card-time-icon">&#9200;</span>
+              12:00 - 22:00
+            </p>
+            <p style="font-size: 0.8rem; color: var(--text-light); margin-top: 5px;">次回案内可能: 12:00〜</p>
+          </div>
+        </div>
+        <div class="schedule-card fade-in">
+          <div class="schedule-card-image">
+            <span class="schedule-card-placeholder">PHOTO</span>
+            <span class="schedule-card-status few">残りわずか</span>
+          </div>
+          <div class="schedule-card-info">
+            <h4 class="schedule-card-name">もえ <span style="font-size: 0.7rem; background: var(--accent-color); color: white; padding: 2px 6px; border-radius: 3px; margin-left: 5px;">NEW</span></h4>
+            <p class="schedule-card-time">
+              <span class="schedule-card-time-icon">&#9200;</span>
+              14:00 - 24:00
+            </p>
+            <p style="font-size: 0.8rem; color: var(--text-light); margin-top: 5px;">次回案内可能: 20:00〜</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Weekly Schedule -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">WEEKLY SCHEDULE</h2>
+        <p class="section-subtitle">週間スケジュール</p>
+      </div>
+      <div class="price-table-wrapper fade-in" style="overflow-x: auto;">
+        <table class="price-table" style="min-width: 800px;">
+          <thead>
+            <tr>
+              <th>セラピスト</th>
+              <th>1/22(水)</th>
+              <th>1/23(木)</th>
+              <th>1/24(金)</th>
+              <th>1/25(土)</th>
+              <th>1/26(日)</th>
+              <th>1/27(月)</th>
+              <th>1/28(火)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>美咲</strong> <span style="font-size: 0.7rem; color: var(--accent-color);">NEW</span></td>
+              <td>12:00-22:00</td>
+              <td>-</td>
+              <td>14:00-24:00</td>
+              <td>12:00-翌2:00</td>
+              <td>12:00-22:00</td>
+              <td>-</td>
+              <td>14:00-22:00</td>
+            </tr>
+            <tr>
+              <td><strong>あかり</strong></td>
+              <td>14:00-24:00</td>
+              <td>12:00-22:00</td>
+              <td>-</td>
+              <td>14:00-翌2:00</td>
+              <td>-</td>
+              <td>12:00-22:00</td>
+              <td>14:00-24:00</td>
+            </tr>
+            <tr>
+              <td><strong>ひなた</strong> <span style="font-size: 0.7rem; color: #4CAF50;">PICK UP</span></td>
+              <td>12:00-20:00</td>
+              <td>14:00-22:00</td>
+              <td>12:00-22:00</td>
+              <td>-</td>
+              <td>12:00-20:00</td>
+              <td>14:00-22:00</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td><strong>りお</strong></td>
+              <td>16:00-翌2:00</td>
+              <td>18:00-翌3:00</td>
+              <td>16:00-翌2:00</td>
+              <td>16:00-翌3:00</td>
+              <td>-</td>
+              <td>-</td>
+              <td>16:00-翌2:00</td>
+            </tr>
+            <tr>
+              <td><strong>はな</strong> <span style="font-size: 0.7rem; color: #4CAF50;">PICK UP</span></td>
+              <td>12:00-24:00</td>
+              <td>-</td>
+              <td>12:00-24:00</td>
+              <td>12:00-翌2:00</td>
+              <td>12:00-22:00</td>
+              <td>14:00-24:00</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td><strong>あおい</strong></td>
+              <td>14:00-翌2:00</td>
+              <td>14:00-翌2:00</td>
+              <td>-</td>
+              <td>12:00-24:00</td>
+              <td>14:00-翌2:00</td>
+              <td>-</td>
+              <td>14:00-翌2:00</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="text-align: center; margin-top: 20px; font-size: 0.85rem; color: var(--text-light);">
+        ※スケジュールは変更になる場合がございます。最新情報はお電話にてご確認ください。
+      </p>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="section section-dark">
+    <div class="container" style="text-align: center;">
+      <h2 style="font-family: var(--font-family-en); font-size: 2rem; color: var(--accent-color); margin-bottom: 20px;">RESERVATION</h2>
+      <p style="margin-bottom: 40px; color: rgba(255,255,255,0.8);">ご予約・お問い合わせはこちら</p>
+      <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
+        <a href="tel:03-XXXX-XXXX" class="btn btn-primary">
+          &#9742; 03-XXXX-XXXX
+        </a>
+        <a href="#" class="btn btn-outline">
+          LINEで予約する
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-main">
+        <div class="footer-brand">
+          <h4 class="footer-logo">LUXE SPA</h4>
+          <p class="footer-logo-sub">PREMIUM MEN'S ESTHETIC</p>
+          <p class="footer-description">
+            都内最高峰のメンズエステサロン。
+            完全個室で極上のリラクゼーションをお届けします。
+          </p>
+        </div>
+        <div class="footer-nav">
+          <h5 class="footer-nav-title">MENU</h5>
+          <ul class="footer-nav-list">
+            <li><a href="index.html" class="footer-nav-link">TOP</a></li>
+            <li><a href="index.html#concept" class="footer-nav-link">CONCEPT</a></li>
+            <li><a href="system.html" class="footer-nav-link">SYSTEM</a></li>
+            <li><a href="therapist.html" class="footer-nav-link">THERAPIST</a></li>
+          </ul>
+        </div>
+        <div class="footer-nav">
+          <h5 class="footer-nav-title">INFORMATION</h5>
+          <ul class="footer-nav-list">
+            <li><a href="schedule.html" class="footer-nav-link">SCHEDULE</a></li>
+            <li><a href="access.html" class="footer-nav-link">ACCESS</a></li>
+            <li><a href="recruit.html" class="footer-nav-link">RECRUIT</a></li>
+          </ul>
+        </div>
+        <div class="footer-contact">
+          <h5 class="footer-nav-title">CONTACT</h5>
+          <div class="footer-contact-item">
+            <span class="footer-contact-icon">&#9742;</span>
+            <div>
+              <p class="footer-tel-number">03-XXXX-XXXX</p>
+              <p>受付 12:00〜翌3:00</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copyright">&copy; 2025 LUXE SPA. All Rights Reserved.</p>
+        <div class="footer-legal">
+          <a href="#" class="footer-legal-link">プライバシーポリシー</a>
+          <a href="#" class="footer-legal-link">特定商取引法に基づく表記</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Fixed Contact Bar (Mobile) -->
+  <div class="fixed-contact">
+    <div class="container">
+      <div class="fixed-contact-inner">
+        <a href="tel:03-XXXX-XXXX" class="fixed-contact-btn fixed-contact-tel">
+          &#9742; 電話予約
+        </a>
+        <a href="#" class="fixed-contact-btn fixed-contact-reserve">
+          LINE予約
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
