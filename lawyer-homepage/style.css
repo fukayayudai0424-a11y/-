@@ -1,0 +1,1743 @@
+/* ============================================
+   青山法律事務所 - スタイルシート
+   信頼感・まじめさを重視したデザイン
+   ============================================ */
+
+/* ============================================
+   CSS Variables（カスタムプロパティ）
+   ============================================ */
+:root {
+    /* メインカラー - ネイビー系（信頼・まじめ） */
+    --primary-color: #1a3a5c;
+    --primary-dark: #0f2640;
+    --primary-light: #2a5a8c;
+
+    /* アクセントカラー - ゴールド系（高級感・権威） */
+    --accent-color: #b8860b;
+    --accent-light: #d4a849;
+
+    /* テキストカラー */
+    --text-dark: #222222;
+    --text-medium: #444444;
+    --text-light: #666666;
+    --text-muted: #888888;
+
+    /* 背景カラー */
+    --bg-white: #ffffff;
+    --bg-light: #f8f9fa;
+    --bg-gray: #f0f2f5;
+    --bg-dark: #1a3a5c;
+
+    /* ボーダーカラー */
+    --border-light: #e0e4e8;
+    --border-medium: #c8cdd2;
+
+    /* シャドウ */
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.06);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+    --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.16);
+
+    /* フォント */
+    --font-serif: 'Noto Serif JP', serif;
+    --font-sans: 'Noto Sans JP', sans-serif;
+
+    /* サイズ */
+    --header-height: 80px;
+    --container-width: 1200px;
+    --section-padding: 100px;
+
+    /* トランジション */
+    --transition-fast: 0.2s ease;
+    --transition-normal: 0.3s ease;
+}
+
+/* ============================================
+   リセット & 基本スタイル
+   ============================================ */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.8;
+    color: var(--text-dark);
+    background-color: var(--bg-white);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    vertical-align: middle;
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+}
+
+a:hover {
+    color: var(--primary-light);
+}
+
+ul {
+    list-style: none;
+}
+
+/* ============================================
+   共通コンポーネント
+   ============================================ */
+.container {
+    width: 100%;
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.section-title {
+    font-family: var(--font-serif);
+    font-size: 2.5rem;
+    font-weight: 600;
+    text-align: center;
+    color: var(--primary-color);
+    margin-bottom: 16px;
+    letter-spacing: 0.05em;
+}
+
+.section-subtitle {
+    font-size: 1rem;
+    color: var(--text-light);
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+/* ボタン */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 16px 32px;
+    font-size: 1rem;
+    font-weight: 500;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    text-decoration: none;
+}
+
+.btn-primary {
+    background: var(--primary-color);
+    color: white;
+}
+
+.btn-primary:hover {
+    background: var(--primary-dark);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.btn-secondary {
+    background: white;
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+}
+
+.btn-secondary:hover {
+    background: var(--primary-color);
+    color: white;
+}
+
+.btn-full {
+    width: 100%;
+}
+
+.icon-phone {
+    width: 20px;
+    height: 20px;
+}
+
+/* ============================================
+   ヘッダー
+   ============================================ */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: white;
+    box-shadow: var(--shadow-sm);
+}
+
+.header-top {
+    background: var(--primary-color);
+    padding: 8px 0;
+}
+
+.header-contact {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 20px;
+    font-size: 0.875rem;
+}
+
+.contact-text {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.tel-number {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: white;
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+}
+
+.tel-number:hover {
+    color: var(--accent-light);
+}
+
+.tel-number .icon-phone {
+    width: 18px;
+    height: 18px;
+}
+
+.business-hours {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.75rem;
+}
+
+.header-nav {
+    padding: 0 0;
+}
+
+.header-nav .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: var(--header-height);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.logo:hover {
+    color: var(--primary-color);
+}
+
+.logo-icon {
+    font-size: 2rem;
+}
+
+.nav-menu {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+}
+
+.nav-menu a {
+    font-size: 0.9375rem;
+    color: var(--text-dark);
+    font-weight: 500;
+    position: relative;
+    padding: 8px 0;
+}
+
+.nav-menu a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--primary-color);
+    transition: width var(--transition-normal);
+}
+
+.nav-menu a:hover::after {
+    width: 100%;
+}
+
+.nav-contact {
+    background: var(--primary-color);
+    color: white !important;
+    padding: 12px 24px !important;
+    border-radius: 4px;
+}
+
+.nav-contact::after {
+    display: none !important;
+}
+
+.nav-contact:hover {
+    background: var(--primary-dark);
+}
+
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 6px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+}
+
+.menu-toggle span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--primary-color);
+    transition: all var(--transition-fast);
+}
+
+/* ============================================
+   ヒーローセクション
+   ============================================ */
+.hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-color) 50%, var(--primary-light) 100%);
+    padding-top: calc(var(--header-height) + 40px);
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    opacity: 0.5;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(ellipse at center, transparent 0%, rgba(15, 38, 64, 0.4) 100%);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    color: white;
+    max-width: 900px;
+    padding: 40px 20px;
+}
+
+.hero-subtitle {
+    font-size: 1.125rem;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    margin-bottom: 24px;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.hero-title {
+    font-family: var(--font-serif);
+    font-size: 3.5rem;
+    font-weight: 700;
+    line-height: 1.4;
+    margin-bottom: 24px;
+    letter-spacing: 0.05em;
+}
+
+.hero-description {
+    font-size: 1.125rem;
+    line-height: 2;
+    margin-bottom: 40px;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 48px;
+}
+
+.hero-buttons .btn-primary {
+    background: var(--accent-color);
+    font-size: 1.125rem;
+    padding: 18px 40px;
+}
+
+.hero-buttons .btn-primary:hover {
+    background: var(--accent-light);
+}
+
+.hero-buttons .btn-secondary {
+    background: transparent;
+    border-color: white;
+    color: white;
+}
+
+.hero-buttons .btn-secondary:hover {
+    background: white;
+    color: var(--primary-color);
+}
+
+.hero-features {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.hero-feature {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.95);
+}
+
+.feature-icon {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--accent-color);
+    border-radius: 50%;
+    font-size: 0.75rem;
+}
+
+/* ============================================
+   お悩みセクション
+   ============================================ */
+.concerns {
+    padding: var(--section-padding) 0;
+    background: var(--bg-light);
+}
+
+.concerns-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.concern-item {
+    background: white;
+    padding: 40px 30px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+    transition: all var(--transition-normal);
+    border: 1px solid var(--border-light);
+}
+
+.concern-item:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--primary-light);
+}
+
+.concern-icon {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.concern-item h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 12px;
+}
+
+.concern-item p {
+    font-size: 0.9375rem;
+    color: var(--text-light);
+    line-height: 1.7;
+}
+
+/* ============================================
+   強みセクション
+   ============================================ */
+.strengths {
+    padding: var(--section-padding) 0;
+    background: white;
+}
+
+.strengths-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+}
+
+.strength-item {
+    position: relative;
+    text-align: center;
+    padding: 40px 30px;
+}
+
+.strength-number {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--font-serif);
+    font-size: 4rem;
+    font-weight: 700;
+    color: rgba(26, 58, 92, 0.08);
+    line-height: 1;
+}
+
+.strength-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 24px;
+    color: var(--primary-color);
+}
+
+.strength-icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+.strength-item h3 {
+    font-size: 1.375rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 16px;
+}
+
+.strength-item p {
+    font-size: 0.9375rem;
+    color: var(--text-light);
+    line-height: 1.8;
+}
+
+/* ============================================
+   取扱業務セクション
+   ============================================ */
+.services {
+    padding: var(--section-padding) 0;
+    background: var(--bg-gray);
+}
+
+.services-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 48px;
+}
+
+.tab-btn {
+    padding: 14px 32px;
+    font-size: 1rem;
+    font-weight: 500;
+    background: white;
+    border: 2px solid var(--border-light);
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    color: var(--text-medium);
+}
+
+.tab-btn:hover {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+.tab-btn.active {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+    color: white;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+    animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.service-card {
+    background: white;
+    padding: 36px 28px;
+    border-radius: 8px;
+    box-shadow: var(--shadow-sm);
+    transition: all var(--transition-normal);
+    border: 1px solid var(--border-light);
+}
+
+.service-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+}
+
+.service-icon {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.service-card h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 16px;
+}
+
+.service-card ul {
+    margin-bottom: 20px;
+}
+
+.service-card li {
+    font-size: 0.9375rem;
+    color: var(--text-light);
+    padding: 6px 0;
+    padding-left: 20px;
+    position: relative;
+}
+
+.service-card li::before {
+    content: '・';
+    position: absolute;
+    left: 0;
+    color: var(--primary-color);
+}
+
+.service-link {
+    display: inline-block;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: var(--primary-color);
+    transition: all var(--transition-fast);
+}
+
+.service-link:hover {
+    color: var(--primary-light);
+    transform: translateX(4px);
+}
+
+/* ============================================
+   弁護士紹介セクション
+   ============================================ */
+.lawyers {
+    padding: var(--section-padding) 0;
+    background: white;
+}
+
+.lawyers-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+}
+
+.lawyer-card {
+    background: var(--bg-light);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: all var(--transition-normal);
+}
+
+.lawyer-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+}
+
+.lawyer-image {
+    height: 300px;
+    overflow: hidden;
+}
+
+.lawyer-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-normal);
+}
+
+.lawyer-card:hover .lawyer-image img {
+    transform: scale(1.05);
+}
+
+.lawyer-info {
+    padding: 28px;
+}
+
+.lawyer-position {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--accent-color);
+    background: rgba(184, 134, 11, 0.1);
+    padding: 4px 12px;
+    border-radius: 4px;
+    margin-bottom: 12px;
+}
+
+.lawyer-name {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 4px;
+}
+
+.lawyer-name-en {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+}
+
+.lawyer-career h4,
+.lawyer-specialty h4 {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--text-medium);
+    margin-bottom: 8px;
+}
+
+.lawyer-career {
+    margin-bottom: 16px;
+}
+
+.lawyer-career ul {
+    font-size: 0.875rem;
+    color: var(--text-light);
+}
+
+.lawyer-career li {
+    padding: 2px 0;
+}
+
+.lawyer-specialty {
+    margin-bottom: 16px;
+}
+
+.specialty-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.specialty-tags span {
+    font-size: 0.75rem;
+    padding: 4px 10px;
+    background: var(--primary-color);
+    color: white;
+    border-radius: 4px;
+}
+
+.lawyer-message {
+    font-size: 0.875rem;
+    color: var(--text-light);
+    font-style: italic;
+    padding-top: 16px;
+    border-top: 1px solid var(--border-light);
+    line-height: 1.7;
+}
+
+/* ============================================
+   解決事例セクション
+   ============================================ */
+.cases {
+    padding: var(--section-padding) 0;
+    background: var(--bg-light);
+}
+
+.cases-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    margin-bottom: 32px;
+}
+
+.case-card {
+    background: white;
+    padding: 32px;
+    border-radius: 8px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-light);
+    transition: all var(--transition-normal);
+}
+
+.case-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.case-category {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: white;
+    background: var(--primary-color);
+    padding: 4px 12px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+}
+
+.case-card h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 16px;
+}
+
+.case-details {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 16px;
+}
+
+.case-info {
+    display: flex;
+    gap: 8px;
+    font-size: 0.875rem;
+}
+
+.case-label {
+    color: var(--text-muted);
+}
+
+.case-value {
+    font-weight: 500;
+    color: var(--text-dark);
+}
+
+.case-summary {
+    font-size: 0.9375rem;
+    color: var(--text-light);
+    line-height: 1.7;
+    margin-bottom: 20px;
+}
+
+.case-result {
+    background: rgba(26, 58, 92, 0.05);
+    padding: 16px;
+    border-radius: 6px;
+    border-left: 4px solid var(--accent-color);
+}
+
+.result-label {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--accent-color);
+    margin-bottom: 4px;
+}
+
+.result-value {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.cases-note {
+    text-align: center;
+    font-size: 0.875rem;
+    color: var(--text-muted);
+}
+
+/* ============================================
+   費用案内セクション
+   ============================================ */
+.fee {
+    padding: var(--section-padding) 0;
+    background: white;
+}
+
+.fee-notice {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: linear-gradient(135deg, rgba(184, 134, 11, 0.1) 0%, rgba(212, 168, 73, 0.1) 100%);
+    padding: 24px 32px;
+    border-radius: 8px;
+    margin-bottom: 48px;
+    border: 1px solid rgba(184, 134, 11, 0.2);
+}
+
+.notice-icon {
+    font-size: 2.5rem;
+}
+
+.notice-content h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--accent-color);
+    margin-bottom: 4px;
+}
+
+.notice-content p {
+    font-size: 0.9375rem;
+    color: var(--text-medium);
+}
+
+.fee-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-bottom: 60px;
+}
+
+.fee-card {
+    background: var(--bg-light);
+    padding: 32px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.fee-card h3 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid var(--primary-color);
+}
+
+.fee-price {
+    margin-bottom: 12px;
+}
+
+.fee-price:last-child {
+    margin-bottom: 0;
+}
+
+.price-label {
+    display: block;
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+}
+
+.price-value {
+    font-family: var(--font-serif);
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.price-unit {
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+.fee-note {
+    font-size: 0.8125rem;
+    color: var(--text-muted);
+    margin-top: 12px;
+}
+
+.fee-table-section {
+    margin-bottom: 48px;
+}
+
+.fee-table-section h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.fee-table-wrapper {
+    overflow-x: auto;
+}
+
+.fee-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    box-shadow: var(--shadow-sm);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.fee-table th,
+.fee-table td {
+    padding: 16px 20px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-light);
+}
+
+.fee-table th {
+    background: var(--primary-color);
+    color: white;
+    font-weight: 600;
+    font-size: 0.9375rem;
+}
+
+.fee-table td {
+    font-size: 0.9375rem;
+    color: var(--text-medium);
+}
+
+.fee-table tr:last-child td {
+    border-bottom: none;
+}
+
+.fee-table tr:hover td {
+    background: var(--bg-light);
+}
+
+.fee-table-note {
+    text-align: center;
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    margin-top: 16px;
+}
+
+.payment-info {
+    text-align: center;
+}
+
+.payment-info h3 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+}
+
+.payment-methods {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    flex-wrap: wrap;
+}
+
+.payment-method {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1rem;
+    color: var(--text-medium);
+}
+
+.method-icon {
+    font-size: 1.5rem;
+}
+
+/* ============================================
+   ご相談の流れセクション
+   ============================================ */
+.flow {
+    padding: var(--section-padding) 0;
+    background: var(--primary-color);
+    color: white;
+}
+
+.flow .section-title {
+    color: white;
+}
+
+.flow .section-subtitle {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.flow-steps {
+    display: flex;
+    gap: 24px;
+    position: relative;
+}
+
+.flow-steps::before {
+    content: '';
+    position: absolute;
+    top: 40px;
+    left: 60px;
+    right: 60px;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.flow-step {
+    flex: 1;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+.step-number {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 24px;
+    background: white;
+    color: var(--primary-color);
+    font-family: var(--font-serif);
+    font-size: 2rem;
+    font-weight: 700;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.step-content h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.step-content p {
+    font-size: 0.9375rem;
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.7;
+}
+
+/* ============================================
+   お問い合わせセクション
+   ============================================ */
+.contact {
+    padding: var(--section-padding) 0;
+    background: var(--bg-light);
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 48px;
+}
+
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.contact-method {
+    background: white;
+    padding: 32px;
+    border-radius: 8px;
+    box-shadow: var(--shadow-sm);
+}
+
+.contact-method h3 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 16px;
+}
+
+.contact-tel {
+    display: block;
+    font-family: var(--font-serif);
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 8px;
+}
+
+.contact-tel:hover {
+    color: var(--primary-light);
+}
+
+.contact-hours {
+    font-size: 0.9375rem;
+    color: var(--text-medium);
+    margin-bottom: 8px;
+}
+
+.contact-note {
+    font-size: 0.8125rem;
+    color: var(--text-muted);
+}
+
+.line-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: #06c755;
+    color: white;
+    padding: 14px 28px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+    transition: all var(--transition-normal);
+}
+
+.line-btn:hover {
+    background: #05a847;
+    color: white;
+    transform: translateY(-2px);
+}
+
+.line-icon {
+    width: 24px;
+    height: 24px;
+}
+
+.contact-form-wrapper {
+    background: white;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: var(--shadow-sm);
+}
+
+.contact-form-wrapper h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 24px;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: var(--text-dark);
+}
+
+.required {
+    color: #c53030;
+    font-size: 0.75rem;
+    margin-left: 4px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    padding: 14px 16px;
+    font-size: 1rem;
+    border: 1px solid var(--border-medium);
+    border-radius: 6px;
+    font-family: var(--font-sans);
+    transition: all var(--transition-fast);
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(26, 58, 92, 0.1);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.form-checkbox {
+    flex-direction: row;
+    align-items: center;
+}
+
+.form-checkbox input {
+    width: 18px;
+    height: 18px;
+    margin-right: 8px;
+}
+
+.form-checkbox label {
+    font-size: 0.875rem;
+}
+
+.form-checkbox a {
+    text-decoration: underline;
+}
+
+/* ============================================
+   アクセスセクション
+   ============================================ */
+.access {
+    padding: var(--section-padding) 0;
+    background: white;
+}
+
+.access-content {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 48px;
+}
+
+.office-name {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 32px;
+}
+
+.office-icon {
+    font-size: 2rem;
+    color: var(--primary-color);
+}
+
+.office-name h3 {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.access-list {
+    display: grid;
+    gap: 20px;
+}
+
+.access-list dt {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 4px;
+}
+
+.access-list dd {
+    font-size: 0.9375rem;
+    color: var(--text-medium);
+    line-height: 1.7;
+}
+
+.access-list dd a {
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.access-list dd small {
+    display: block;
+    font-size: 0.8125rem;
+    color: var(--text-muted);
+    margin-top: 4px;
+}
+
+.access-map {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+}
+
+.access-map iframe {
+    display: block;
+}
+
+/* ============================================
+   フッター
+   ============================================ */
+.footer {
+    background: var(--primary-dark);
+    color: white;
+    padding: 60px 0 0;
+}
+
+.footer-main {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 60px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-serif);
+    font-size: 1.375rem;
+    font-weight: 600;
+    color: white;
+    margin-bottom: 16px;
+}
+
+.footer-logo:hover {
+    color: white;
+}
+
+.footer-description {
+    font-size: 0.9375rem;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.8;
+}
+
+.footer-nav {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+}
+
+.footer-nav h4 {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: var(--accent-light);
+}
+
+.footer-nav ul {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.footer-nav a {
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.7);
+    transition: color var(--transition-fast);
+}
+
+.footer-nav a:hover {
+    color: white;
+}
+
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 0;
+}
+
+.footer-links {
+    display: flex;
+    gap: 24px;
+}
+
+.footer-links a {
+    font-size: 0.8125rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.footer-links a:hover {
+    color: white;
+}
+
+.copyright {
+    font-size: 0.8125rem;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* ============================================
+   固定CTA
+   ============================================ */
+.fixed-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: none;
+    z-index: 900;
+    box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.fixed-cta a {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 16px;
+    font-size: 1rem;
+    font-weight: 600;
+    text-align: center;
+}
+
+.fixed-cta svg {
+    width: 20px;
+    height: 20px;
+}
+
+.fixed-tel {
+    background: white;
+    color: var(--primary-color);
+}
+
+.fixed-contact {
+    background: var(--primary-color);
+    color: white;
+}
+
+/* ============================================
+   レスポンシブデザイン
+   ============================================ */
+
+/* タブレット */
+@media (max-width: 1024px) {
+    :root {
+        --section-padding: 80px;
+    }
+
+    .section-title {
+        font-size: 2rem;
+    }
+
+    .hero-title {
+        font-size: 2.75rem;
+    }
+
+    .concerns-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .strengths-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+    }
+
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .lawyers-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .lawyers-grid .lawyer-card:last-child {
+        grid-column: span 2;
+        max-width: 50%;
+        margin: 0 auto;
+    }
+
+    .flow-steps {
+        flex-wrap: wrap;
+    }
+
+    .flow-steps::before {
+        display: none;
+    }
+
+    .flow-step {
+        flex: 0 0 calc(50% - 12px);
+    }
+}
+
+/* スマートフォン */
+@media (max-width: 768px) {
+    :root {
+        --header-height: 60px;
+        --section-padding: 60px;
+    }
+
+    .header-top {
+        display: none;
+    }
+
+    .menu-toggle {
+        display: flex;
+    }
+
+    .nav-menu {
+        position: fixed;
+        top: var(--header-height);
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: white;
+        flex-direction: column;
+        padding: 40px 20px;
+        gap: 0;
+        transform: translateX(100%);
+        transition: transform var(--transition-normal);
+    }
+
+    .nav-menu.active {
+        transform: translateX(0);
+    }
+
+    .nav-menu li {
+        width: 100%;
+        border-bottom: 1px solid var(--border-light);
+    }
+
+    .nav-menu a {
+        display: block;
+        padding: 16px 0;
+        font-size: 1rem;
+    }
+
+    .nav-menu a::after {
+        display: none;
+    }
+
+    .nav-contact {
+        margin-top: 24px;
+        text-align: center;
+    }
+
+    .section-title {
+        font-size: 1.75rem;
+    }
+
+    .section-subtitle {
+        margin-bottom: 40px;
+    }
+
+    .hero {
+        min-height: auto;
+        padding: calc(var(--header-height) + 60px) 20px 80px;
+    }
+
+    .hero-title {
+        font-size: 2rem;
+    }
+
+    .hero-description {
+        font-size: 1rem;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+    }
+
+    .hero-buttons .btn {
+        width: 100%;
+    }
+
+    .hero-features {
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .concerns-grid,
+    .strengths-grid,
+    .services-grid,
+    .lawyers-grid,
+    .cases-grid,
+    .fee-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .lawyers-grid .lawyer-card:last-child {
+        grid-column: span 1;
+        max-width: 100%;
+    }
+
+    .services-tabs {
+        flex-direction: column;
+    }
+
+    .tab-btn {
+        width: 100%;
+    }
+
+    .flow-step {
+        flex: 0 0 100%;
+    }
+
+    .contact-grid,
+    .access-content {
+        grid-template-columns: 1fr;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-form-wrapper {
+        padding: 24px;
+    }
+
+    .footer-main {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .footer-nav {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        gap: 16px;
+        text-align: center;
+    }
+
+    .fixed-cta {
+        display: flex;
+    }
+
+    body {
+        padding-bottom: 60px;
+    }
+
+    .fee-table {
+        font-size: 0.875rem;
+    }
+
+    .fee-table th,
+    .fee-table td {
+        padding: 12px 10px;
+    }
+}
+
+/* 小さいスマートフォン */
+@media (max-width: 375px) {
+    .hero-title {
+        font-size: 1.75rem;
+    }
+
+    .section-title {
+        font-size: 1.5rem;
+    }
+
+    .contact-tel {
+        font-size: 1.5rem;
+    }
+
+    .footer-nav {
+        grid-template-columns: 1fr;
+    }
+}
