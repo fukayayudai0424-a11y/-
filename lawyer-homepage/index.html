@@ -14,14 +14,21 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="style.css">
+
+    <!-- Fallback loader styles -->
+    <style>
+        .loader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+    </style>
 </head>
 <body>
     <!-- ローディング画面 -->
-    <div class="loader" id="loader">
-        <div class="loader-content">
-            <div class="loader-logo">⚖</div>
-            <div class="loader-text">青山法律事務所</div>
-            <div class="loader-bar"><span></span></div>
+    <div class="loader" id="loader" style="position:fixed;top:0;left:0;width:100%;height:100%;background:#0f2240;display:flex;align-items:center;justify-content:center;z-index:10000;transition:opacity 0.6s,visibility 0.6s;">
+        <div class="loader-content" style="text-align:center;">
+            <div class="loader-logo" style="font-size:4rem;margin-bottom:24px;">⚖</div>
+            <div class="loader-text" style="font-size:1.5rem;color:#fff;margin-bottom:32px;letter-spacing:0.2em;">青山法律事務所</div>
+            <div class="loader-bar" style="width:200px;height:2px;background:rgba(255,255,255,0.2);border-radius:99px;overflow:hidden;margin:0 auto;">
+                <span style="display:block;width:100%;height:100%;background:#b8860b;"></span>
+            </div>
         </div>
     </div>
 

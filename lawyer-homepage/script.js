@@ -10,13 +10,14 @@ document.addEventListener('DOMContentLoaded', function() {
     // ============================================
     const loader = document.getElementById('loader');
 
-    window.addEventListener('load', function() {
-        setTimeout(function() {
+    // ローダーを1.5秒後に非表示（フォント読み込み待ちなし）
+    setTimeout(function() {
+        if (loader) {
             loader.classList.add('hidden');
-            document.body.classList.remove('no-scroll');
-            initAnimations();
-        }, 1500);
-    });
+        }
+        document.body.classList.remove('no-scroll');
+        initAnimations();
+    }, 1500);
 
     // ============================================
     // Header Scroll Effect
