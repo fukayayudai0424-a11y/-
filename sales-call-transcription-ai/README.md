@@ -3,7 +3,16 @@
 
 営業録画やMP3ファイル、YouTubeリンクをアップロードすると、2名の話者を自動で識別し、すべての会話を文字起こしするAIアプリケーションです。
 
+**2時間以上の長時間音声に完全対応！**
+
 ![Demo](https://via.placeholder.com/800x400?text=Sales+Call+Transcription+AI)
+
+## 特徴
+
+- **2時間以上の長時間音声対応** - 営業会議もまるごと文字起こし
+- **リアルタイム進捗表示** - 処理状況がひと目でわかる
+- **話者分離** - 2人の話者を自動識別
+- **バックグラウンド処理** - ブラウザを閉じても処理継続
 
 ## 機能
 
@@ -14,6 +23,16 @@
 - **会話形式の出力** - タイムスタンプ付きの見やすい会話形式で表示
 - **結果のエクスポート** - テキストファイルとしてダウンロード、クリップボードへのコピー
 
+## 対応時間の目安
+
+| 音声の長さ | CPU処理時間 | GPU処理時間 |
+|-----------|------------|-------------|
+| 30分 | 約30〜60分 | 約5〜10分 |
+| 1時間 | 約1〜2時間 | 約10〜20分 |
+| 2時間 | 約2〜4時間 | 約20〜40分 |
+
+※ Whisper baseモデル使用時
+
 ## 技術スタック
 
 ### バックエンド
@@ -21,10 +40,12 @@
 - **OpenAI Whisper** - 高精度な音声認識モデル
 - **pyannote.audio** - 話者分離（ダイアライゼーション）
 - **yt-dlp** - YouTube音声抽出
+- **非同期ジョブシステム** - 長時間処理対応
 
 ### フロントエンド
 - **Vanilla JavaScript** - 軽量で高速なUI
 - **モダンCSS** - レスポンシブデザイン
+- **リアルタイムポーリング** - 進捗表示
 
 ### インフラ
 - **Docker** - コンテナ化
@@ -65,6 +86,8 @@ WHISPER_MODEL=base
    - [pyannote/speaker-diarization-3.1](https://huggingface.co/pyannote/speaker-diarization-3.1)
    - [pyannote/segmentation-3.0](https://huggingface.co/pyannote/segmentation-3.0)
 
+**注意**: トークンがなくても動作します（簡易的な話者分離モードになります）
+
 ### 3. Dockerで起動
 
 ```bash
@@ -96,10 +119,12 @@ python -m http.server 3000
 
 ## API エンドポイント
 
-### ファイルアップロードによる文字起こし
+### 長時間音声用（推奨）
+
+#### ジョブ作成（ファイル）
 
 ```
-POST /api/transcribe/file
+POST /api/jobs/file
 ```
 
 **パラメータ:**
@@ -108,23 +133,61 @@ POST /api/transcribe/file
 - `speaker_a_name`: 話者Aの名前
 - `speaker_b_name`: 話者Bの名前
 
-### YouTubeリンクによる文字起こし
-
-```
-POST /api/transcribe/youtube
-```
-
-**リクエストボディ:**
+**レスポンス:**
 ```json
 {
-  "url": "https://www.youtube.com/watch?v=...",
-  "language": "ja",
-  "speaker_a_name": "営業担当",
-  "speaker_b_name": "お客様"
+  "job_id": "abc12345",
+  "status": "pending",
+  "progress": 0,
+  "message": "ジョブを作成しました"
 }
 ```
 
-### レスポンス例
+#### ジョブ作成（YouTube）
+
+```
+POST /api/jobs/youtube
+```
+
+#### ジョブ状態確認
+
+```
+GET /api/jobs/{job_id}
+```
+
+**レスポンス:**
+```json
+{
+  "job_id": "abc12345",
+  "status": "transcribing",
+  "progress": 45.5,
+  "message": "音声を文字起こししています...",
+  "result": null
+}
+```
+
+ステータス:
+- `pending` - 待機中
+- `processing` - 処理開始
+- `transcribing` - 文字起こし中
+- `diarizing` - 話者分離中
+- `completed` - 完了
+- `failed` - 失敗
+
+#### ジョブ一覧
+
+```
+GET /api/jobs
+```
+
+### 短時間音声用（5分以内）
+
+```
+POST /api/transcribe/file
+POST /api/transcribe/youtube
+```
+
+### 結果例
 
 ```json
 {
@@ -139,7 +202,11 @@ POST /api/transcribe/youtube
       "speaker": "SPEAKER_00"
     }
   ],
-  "metadata": null
+  "stats": {
+    "total_segments": 150,
+    "speaker_a_segments": 80,
+    "speaker_b_segments": 70
+  }
 }
 ```
 
@@ -153,6 +220,8 @@ POST /api/transcribe/youtube
 | medium | 769M       | ~5GB        | ~2x     | 高+  |
 | large  | 1550M      | ~10GB       | 1x      | 最高 |
 
+長時間音声の場合は `base` または `small` を推奨。
+
 ## トラブルシューティング
 
 ### 話者分離が動作しない
@@ -165,11 +234,18 @@ POST /api/transcribe/youtube
 
 - WHISPER_MODEL を `tiny` または `base` に変更
 - GPU が利用可能な環境で実行
+- 長時間音声は時間がかかるのは正常です
 
 ### YouTubeの音声が抽出できない
 
 - yt-dlp を最新版に更新
 - 動画が地域制限や年齢制限がないか確認
+
+### 処理が途中で止まる
+
+- メモリ不足の可能性があります
+- Docker のメモリ制限を増やしてください
+- より小さいWhisperモデルを使用してください
 
 ## ライセンス
 

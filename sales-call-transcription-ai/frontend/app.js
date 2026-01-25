@@ -1,12 +1,15 @@
 /**
  * Sales Call Transcription AI - Frontend Application
- * 営業通話文字起こしAI フロントエンド
+ * 営業通話文字起こしAI フロントエンド（2時間以上対応版）
  */
 
 // API Base URL
 const API_BASE_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
     ? 'http://localhost:8000'
     : '';
+
+// ポーリング間隔（ミリ秒）
+const POLL_INTERVAL = 2000;
 
 // DOM Elements
 const elements = {
@@ -69,7 +72,9 @@ let state = {
     selectedFile: null,
     youtubeUrl: '',
     isProcessing: false,
-    lastResult: null
+    lastResult: null,
+    currentJobId: null,
+    pollTimer: null
 };
 
 // Initialize
@@ -89,11 +94,9 @@ function setupTabNavigation() {
         tab.addEventListener('click', () => {
             const tabId = tab.dataset.tab;
 
-            // Update active tab
             elements.tabs.forEach(t => t.classList.remove('active'));
             tab.classList.add('active');
 
-            // Update content
             elements.tabContents.forEach(content => {
                 content.classList.remove('active');
                 if (content.id === `${tabId}-tab`) {
@@ -109,12 +112,10 @@ function setupTabNavigation() {
 
 // File Upload
 function setupFileUpload() {
-    // Click to upload
     elements.dropZone.addEventListener('click', () => {
         elements.fileInput.click();
     });
 
-    // File selected
     elements.fileInput.addEventListener('change', (e) => {
         const file = e.target.files[0];
         if (file) {
@@ -122,7 +123,6 @@ function setupFileUpload() {
         }
     });
 
-    // Drag and drop
     elements.dropZone.addEventListener('dragover', (e) => {
         e.preventDefault();
         elements.dropZone.classList.add('dragover');
@@ -142,7 +142,6 @@ function setupFileUpload() {
         }
     });
 
-    // Remove file
     elements.removeFile.addEventListener('click', () => {
         state.selectedFile = null;
         elements.fileInput.value = '';
@@ -153,19 +152,16 @@ function setupFileUpload() {
 }
 
 function handleFileSelection(file) {
-    const allowedTypes = ['audio/mpeg', 'audio/wav', 'audio/mp4', 'audio/ogg', 'audio/flac', 'audio/webm', 'video/webm'];
     const allowedExtensions = ['.mp3', '.wav', '.m4a', '.ogg', '.flac', '.webm'];
-
     const ext = '.' + file.name.split('.').pop().toLowerCase();
 
-    if (!allowedExtensions.includes(ext) && !allowedTypes.includes(file.type)) {
+    if (!allowedExtensions.includes(ext)) {
         showError('対応していないファイル形式です。MP3, WAV, M4A, OGG, FLAC, WebM形式のファイルをお使いください。');
         return;
     }
 
     state.selectedFile = file;
 
-    // Update UI
     elements.fileName.textContent = file.name;
     elements.fileSize.textContent = formatFileSize(file.size);
     elements.dropZone.style.display = 'none';
@@ -177,7 +173,8 @@ function handleFileSelection(file) {
 function formatFileSize(bytes) {
     if (bytes < 1024) return bytes + ' B';
     if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
-    return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
+    if (bytes < 1024 * 1024 * 1024) return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
+    return (bytes / (1024 * 1024 * 1024)).toFixed(2) + ' GB';
 }
 
 // YouTube Input
@@ -208,21 +205,18 @@ function isValidYouTubeUrl(url) {
         /^(https?:\/\/)?(www\.)?youtu\.be\/[\w-]+/,
         /^(https?:\/\/)?(www\.)?youtube\.com\/embed\/[\w-]+/
     ];
-
     return patterns.some(pattern => pattern.test(url));
 }
 
 async function fetchYouTubeInfo(url) {
     try {
         const response = await fetch(`${API_BASE_URL}/api/youtube/info?url=${encodeURIComponent(url)}`);
-
         if (response.ok) {
             const info = await response.json();
-
             elements.youtubeThumbnail.src = info.thumbnail || '';
             elements.youtubeTitle.textContent = info.title || '動画タイトル';
             elements.youtubeDuration.textContent = info.duration
-                ? `時間: ${formatDuration(info.duration)}`
+                ? `時間: ${formatDurationLong(info.duration)}`
                 : '';
             elements.youtubePreview.style.display = 'flex';
         }
@@ -231,10 +225,15 @@ async function fetchYouTubeInfo(url) {
     }
 }
 
-function formatDuration(seconds) {
-    const mins = Math.floor(seconds / 60);
+function formatDurationLong(seconds) {
+    const hours = Math.floor(seconds / 3600);
+    const mins = Math.floor((seconds % 3600) / 60);
     const secs = seconds % 60;
-    return `${mins}:${secs.toString().padStart(2, '0')}`;
+
+    if (hours > 0) {
+        return `${hours}時間${mins}分`;
+    }
+    return `${mins}分${secs}秒`;
 }
 
 // Submit Button
@@ -257,58 +256,57 @@ async function handleSubmit() {
     showLoading();
 
     try {
-        let result;
+        // 非同期ジョブAPIを使用（長時間音声対応）
+        let jobId;
+
+        updateLoadingStep('upload');
+        elements.loadingStatus.textContent = 'ファイルをアップロードしています...';
 
         if (state.activeTab === 'file') {
-            result = await transcribeFile();
+            jobId = await createFileJob();
         } else {
-            result = await transcribeYouTube();
+            jobId = await createYouTubeJob();
         }
 
-        if (result.success) {
-            state.lastResult = result;
-            displayResults(result);
-            showSuccess('文字起こしが完了しました！');
-        } else {
-            showError(result.error || '処理中にエラーが発生しました');
+        if (!jobId) {
+            throw new Error('ジョブの作成に失敗しました');
         }
+
+        state.currentJobId = jobId;
+
+        // ポーリングで進捗を確認
+        await pollJobStatus(jobId);
+
     } catch (error) {
         showError('処理中にエラーが発生しました: ' + error.message);
-    } finally {
         state.isProcessing = false;
         updateSubmitButton();
         hideLoading();
     }
 }
 
-async function transcribeFile() {
-    updateLoadingStep('upload');
-
+async function createFileJob() {
     const formData = new FormData();
     formData.append('file', state.selectedFile);
     formData.append('language', elements.language.value);
     formData.append('speaker_a_name', elements.speakerA.value || '営業担当');
     formData.append('speaker_b_name', elements.speakerB.value || 'お客様');
 
-    updateLoadingStep('transcribe');
-
-    const response = await fetch(`${API_BASE_URL}/api/transcribe/file`, {
+    const response = await fetch(`${API_BASE_URL}/api/jobs/file`, {
         method: 'POST',
         body: formData
     });
 
-    updateLoadingStep('diarize');
+    if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.detail || 'アップロードに失敗しました');
+    }
 
     const result = await response.json();
-
-    updateLoadingStep('complete');
-
-    return result;
+    return result.job_id;
 }
 
-async function transcribeYouTube() {
-    updateLoadingStep('upload');
-
+async function createYouTubeJob() {
     const body = {
         url: state.youtubeUrl,
         language: elements.language.value,
@@ -316,9 +314,7 @@ async function transcribeYouTube() {
         speaker_b_name: elements.speakerB.value || 'お客様'
     };
 
-    updateLoadingStep('transcribe');
-
-    const response = await fetch(`${API_BASE_URL}/api/transcribe/youtube`, {
+    const response = await fetch(`${API_BASE_URL}/api/jobs/youtube`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -326,13 +322,90 @@ async function transcribeYouTube() {
         body: JSON.stringify(body)
     });
 
-    updateLoadingStep('diarize');
+    if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.detail || 'ジョブ作成に失敗しました');
+    }
 
     const result = await response.json();
+    return result.job_id;
+}
 
-    updateLoadingStep('complete');
+async function pollJobStatus(jobId) {
+    return new Promise((resolve, reject) => {
+        const poll = async () => {
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/jobs/${jobId}`);
 
-    return result;
+                if (!response.ok) {
+                    throw new Error('ジョブ状態の取得に失敗しました');
+                }
+
+                const job = await response.json();
+
+                // 進捗を更新
+                updateProgress(job);
+
+                if (job.status === 'completed') {
+                    clearTimeout(state.pollTimer);
+
+                    if (job.result && job.result.success) {
+                        state.lastResult = job.result;
+                        displayResults(job.result);
+                        showSuccess('文字起こしが完了しました！');
+                    } else {
+                        showError('処理は完了しましたが、結果の取得に失敗しました');
+                    }
+
+                    state.isProcessing = false;
+                    updateSubmitButton();
+                    hideLoading();
+                    resolve();
+
+                } else if (job.status === 'failed') {
+                    clearTimeout(state.pollTimer);
+                    showError(job.error || '処理中にエラーが発生しました');
+                    state.isProcessing = false;
+                    updateSubmitButton();
+                    hideLoading();
+                    reject(new Error(job.error));
+
+                } else {
+                    // まだ処理中 - 続けてポーリング
+                    state.pollTimer = setTimeout(poll, POLL_INTERVAL);
+                }
+
+            } catch (error) {
+                clearTimeout(state.pollTimer);
+                reject(error);
+            }
+        };
+
+        poll();
+    });
+}
+
+function updateProgress(job) {
+    const progress = job.progress;
+    const status = job.status;
+    const message = job.message;
+
+    elements.loadingStatus.textContent = message;
+
+    // ステップの更新
+    if (status === 'pending' || status === 'processing') {
+        updateLoadingStep('upload');
+    } else if (status === 'transcribing') {
+        updateLoadingStep('transcribe');
+    } else if (status === 'diarizing') {
+        updateLoadingStep('diarize');
+    } else if (status === 'completed') {
+        updateLoadingStep('complete');
+    }
+
+    // プログレスバーがあれば更新（将来の拡張用）
+    const progressText = `${Math.round(progress)}%`;
+    console.log(`Job ${job.job_id}: ${status} - ${progressText} - ${message}`);
 }
 
 // Loading
@@ -358,8 +431,6 @@ function updateLoadingStep(stepName) {
         complete: '処理が完了しました！'
     };
 
-    elements.loadingStatus.textContent = statusMessages[stepName];
-
     stepOrder.forEach((step, index) => {
         const stepElement = elements.steps[step];
         stepElement.classList.remove('active', 'completed');
@@ -382,10 +453,15 @@ function displayResults(result) {
         elements.metadataContent.innerHTML = `
             <strong>タイトル:</strong> ${result.metadata.title || '-'}<br>
             <strong>投稿者:</strong> ${result.metadata.uploader || '-'}<br>
-            <strong>長さ:</strong> ${result.metadata.duration ? formatDuration(result.metadata.duration) : '-'}
+            <strong>長さ:</strong> ${result.metadata.duration ? formatDurationLong(result.metadata.duration) : '-'}
         `;
     } else {
         elements.metadata.style.display = 'none';
+    }
+
+    // Stats
+    if (result.stats) {
+        console.log('Stats:', result.stats);
     }
 
     // Conversation view
@@ -438,7 +514,7 @@ function displayConversation(conversation, segments) {
         <div class="message ${msg.speakerClass}">
             <div class="message-header">
                 <span class="message-speaker ${msg.speakerClass}">${msg.speakerName}</span>
-                <span class="message-time">${formatTime(msg.start)}</span>
+                <span class="message-time">${formatTimeLong(msg.start)}</span>
             </div>
             <div class="message-text">${msg.texts.join(' ')}</div>
         </div>
@@ -454,7 +530,7 @@ function displaySegmentsTable(segments) {
         const speakerName = seg.speaker === 'SPEAKER_00' ? speakerAName : speakerBName;
         return `
             <tr>
-                <td>${formatTime(seg.start)} - ${formatTime(seg.end)}</td>
+                <td>${formatTimeLong(seg.start)} - ${formatTimeLong(seg.end)}</td>
                 <td>${speakerName}</td>
                 <td>${seg.text}</td>
             </tr>
@@ -462,9 +538,14 @@ function displaySegmentsTable(segments) {
     }).join('');
 }
 
-function formatTime(seconds) {
-    const mins = Math.floor(seconds / 60);
+function formatTimeLong(seconds) {
+    const hours = Math.floor(seconds / 3600);
+    const mins = Math.floor((seconds % 3600) / 60);
     const secs = Math.floor(seconds % 60);
+
+    if (hours > 0) {
+        return `${hours}:${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+    }
     return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
 }
 
